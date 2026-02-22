@@ -36,21 +36,6 @@ $(document).ready(function() {
 
 	});	
 	//++++++++++ Asynchronous ++++++++++++++++
-	$('.sidebar .link_modul .row_modul_header').on('click', function() {
-		load_link_modul( $(this) );
-	});
-	//Event sidebar menu untuk load page spa 
-	$('.sidebar .link_menu').on('click', function() {
-
-		trace();
-
-		//Membuka load page dan efek menu sidebar
-		var link_menu = $('.sidebar .link_menu');
-		var link_menu_target = $(this);
-		var data_page = link_menu_target.attr('data-page');
-		load_page( data_page ); //Inni ada di route_app.js
-
-	});
 	//Event .btn_load untuk melakukan load data ke tabel yang ada di main_container pada page yang sedang aktif atau dimuat
 	$('.main_container').on('click', '.btn_load', function() {
 		trace();
@@ -286,4 +271,9 @@ function trace(label = "", data = null, callback = false) {
 
 	// Eksekusi callback
 	return callback();
+}
+
+function cv_decimal(num, decimals = 2) {
+    const factor = Math.pow(10, decimals);
+    return Math.round((num + Number.EPSILON) * factor) / factor;
 }

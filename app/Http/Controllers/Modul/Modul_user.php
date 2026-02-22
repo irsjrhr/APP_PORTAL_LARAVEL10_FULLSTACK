@@ -8,6 +8,10 @@ use App\Models\Base_model;
 
 class Modul_user extends Controller{
 
+    public function __construct(){
+
+    }
+
     //+++++++ Method dibawah akan ditampilkan dengan asynchronous SPA pada javascript melalui index +++++++++++
     //https://url_app/user/dashboard 
     public function dashboard(){  
@@ -31,7 +35,7 @@ class Modul_user extends Controller{
     }
     //https://url_app/user/FSM/monitoring 
     public function monitoring(){  
-        $data = [];
+        $data = []; 
         return view( 'Modul_user/monitoring', $data );
     }
 }

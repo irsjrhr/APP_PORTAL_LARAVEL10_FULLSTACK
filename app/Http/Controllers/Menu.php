@@ -98,7 +98,7 @@ class Menu{
         self::ADD_ROW_MODULMENU_SIDEBAR( 'Modul Teknisi', [
             [ 
                 "menu" => "Dashboard", 
-                "icon" => "fas fa-dashboard", 
+                "icon" => "fas fa-tachometer-alt", 
                 "url" => asset("teknisi/dashboard") 
             ],
             [ 
@@ -114,7 +114,7 @@ class Menu{
         self::ADD_ROW_MODULMENU_SIDEBAR( 'Modul User', [
             [ 
                 "menu" => "Dashboard", 
-                "icon" => "fas fa-dashboard", 
+                "icon" => "fas fa-tachometer-alt", 
                 "url" => asset("user/dashboard") 
             ],
             [ 

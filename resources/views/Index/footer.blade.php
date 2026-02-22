@@ -24,18 +24,11 @@
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/core_table.js"></script>
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/core_monitoring.js"></script>
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/search_filter.js"></script>
+<script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/main.js"></script>
 {{-- SPA CORE --}}
 
 
-<script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/main.js"></script>
 
-<script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/teknisi_table.js"></script>
-<script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/teknisi_monitoring.js"></script>
-
-
-<script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/user_table.js"></script>
-<script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/user_monitoring.js"></script>
-<script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/user_tambah_project.js"></script>
 
 </body>
 </html>

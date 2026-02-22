@@ -1,12 +1,11 @@
 $(document).ready(function(){
-		//Membuka halaman pertama dari menu yang paling awal yaitu dashboard 
+	//Membuka halaman pertama dari menu yang paling awal yaitu dashboard 
 	var link_menu_first = $('.sidebar').find('.link_menu').first();
 	var data_page = link_menu_first.attr('data-page');
-	load_page( BASE_URL_PAGE + "user/project", function() {
+	load_page( BASE_URL_PAGE + "dashboard", function() {
 
 	});	
 	
-
 	// Method event untMenambahkan data secara asynchronous
 	$('body').on('submit', '#modal_tambah form', function(e) {
 		e.preventDefault(); //Menghentikan laju fungsi submit pada form
