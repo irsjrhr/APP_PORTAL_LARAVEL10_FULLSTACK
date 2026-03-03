@@ -2,7 +2,6 @@
 //INGAT!! INI HARUS TERHUBUNG ATAU DIBARENGI DENGAN core.js dan api.js
 // Kemudian route yang ada disini merupkan callback triger dari pada load page yang di panggil di menu sidebar 
 
-
 var EVENT_NAMESPACE = '.eventSPA';
 $(document).ready(function(e) {
 	$('.sidebar .link_modul .row_modul_header').on('click', function() {
@@ -189,8 +188,7 @@ function load_link_modul( row_modul_header_target ) {
 	var row_container_menu = link_modul_target.find('.row_container_menu');
 	var link_menu_activeTarget = row_container_menu.find('.link_menu.active');
 	var link_modul_icon = link_menu_activeTarget.find('i');
-
-
+	
 	if ( link_modul_target.is('.active') == false ) {
 		//Jika link modul tidak aktif dan tidak terlihat, maka aktifkan dan tampilkan
 
