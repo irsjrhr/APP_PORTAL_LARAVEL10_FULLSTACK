@@ -41,8 +41,62 @@ $(document).ready(function() {
 		trace();
 
 		// Melakukan load table pada section_content yang sedang aktif berdasarkan data-fungsi 
-		load_table_active();
+		load_table_active( $(this) );
 	});
+
+	//Membuka halaman pertama dari menu yang paling awal yaitu dashboard 
+	var link_menu_first = $('.sidebar').find('.link_menu').first();
+	var data_page = link_menu_first.attr('data-page');
+	load_page( BASE_URL_PAGE + "account/account", function() {
+
+	});	
+	
+	//+++++++++++++++++ Method Event Terkait Account ++++++++++++
+	//Event pemindahan data ke modal form update dari tabel row data yang dipilih
+	var by_update_state = false;
+	$('body').on('click', '.section_content[data-fungsi=account] .update_data', function() {
+
+		//Ambil data row json di tr parentnya  
+		var section_content = $('.section_content[data-fungsi=account]');
+		var link_update_data = $( this );
+		var tr = link_update_data.parents( 'tr' );
+		var data_row_json = tr.attr('data-row');
+		data_row_json = cv_json_obj( data_row_json );
+		var modal_update_profile = section_content.find('#modal_update_profile');
+
+		by_update_state =  data_row_json.user;
+
+		//Isi input data diri
+		modal_update_profile.find('[name=nama]').val(data_row_json.nama);
+		modal_update_profile.find('[name=email]').val(data_row_json.email);
+		modal_update_profile.find('[name=alamat]').val(data_row_json.alamat);
+
+		//Isi id file dan source file 
+		modal_update_profile.find('#nama_file').text("NONE");
+		modal_update_profile.find('[name=id_file]').val(data_row_json.id_file_profile);
+		modal_update_profile.find('[name=source_file]').val(data_row_json.source_file_profile);
+
+		modal_update_profile.modal('show');
+	});
+	//Event update submit form profile account
+	$('body').on('submit', '#modal_update_profile form', function(e) {
+		e.preventDefault(); //Menghentikan laju fungsi submit pada form
+		var form = $(this);
+		var modal_target = form.parents('.modal');
+		var data_post = form.serialize();
+		var url_endpoint = URL_SERVICE_BE + "account";
+		var data_param_url = `?by_user=${by_update_state}`;
+		loader_page('show', null);
+		post_update_data( url_endpoint, data_param_url, data_post, function( response ) {
+			loader_page('hide', null);
+			console.log(response);
+			var msg = response.msg;
+			Swal.fire( msg );
+			modal_target.modal('hide');
+			load_table_active();
+		} );
+	});
+	//+++++++++++++++++ EN Of Method Event Terkait Account ++++++++++++
 
 
 });
@@ -87,11 +141,11 @@ function animasi_loadPage( param = "show", animasi_loadPageElInput = "", text_lo
 
 	//Menentukan hilang atau muncul
 	switch( param ){
-	case "show" :
+		case "show" :
 		animasi_loadPageEl.show();
 		break;
 
-	case 'hide' :
+		case 'hide' :
 		setTimeout(function() {
 			animasi_loadPageEl.hide();
 		}, 100);
@@ -224,11 +278,11 @@ function trace(label = "", data = null, callback = false) {
 
 	// Header dengan informasi caller
 	console.log(
-`%c =====TRACE%c ${label} %c| ${callerInfo}`,
-'background:#222;color:#00e676;font-weight:bold;padding:2px 6px;border-radius:4px 0 0 4px;',
-'color:#999;background:#333;padding:2px 8px;',
-'color:#aaa;font-size:11px;font-style:italic;padding:2px 8px;border-radius:0 4px 4px 0;'
-);
+		`%c =====TRACE%c ${label} %c| ${callerInfo}`,
+		'background:#222;color:#00e676;font-weight:bold;padding:2px 6px;border-radius:4px 0 0 4px;',
+		'color:#999;background:#333;padding:2px 8px;',
+		'color:#aaa;font-size:11px;font-style:italic;padding:2px 8px;border-radius:0 4px 4px 0;'
+		);
 
 	// Data
 	if (data !== null) {
@@ -274,6 +328,6 @@ function trace(label = "", data = null, callback = false) {
 }
 
 function cv_decimal(num, decimals = 2) {
-    const factor = Math.pow(10, decimals);
-    return Math.round((num + Number.EPSILON) * factor) / factor;
+	const factor = Math.pow(10, decimals);
+	return Math.round((num + Number.EPSILON) * factor) / factor;
 }

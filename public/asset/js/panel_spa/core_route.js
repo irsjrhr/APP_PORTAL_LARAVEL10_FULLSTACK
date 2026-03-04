@@ -267,11 +267,26 @@ ROUTE.add( BASE_URL_PAGE + 'dashboard', function( route ) {
 });
 
 
-
 //==================== MODUL ACCOUNT ===================
 //https://url_app_fe/account/account
 ROUTE.add( BASE_URL_PAGE + 'account/account', function( route ) {
 	LOAD_PAGE_SPA( route, function() {
+
+		// Method event untMenambahkan data secara asynchronous
+		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
+			e.preventDefault(); //Menghentikan laju fungsi submit pada form
+
+			var form = $(this);
+			var form_data = form.serialize();
+			var url_endpoint = URL_SERVICE_BE + "account";
+			post_tambah_data( url_endpoint, form_data, function( response ) {
+				console.log(response);
+				var msg = response.msg;
+				Swal.fire( msg );
+				//Refresh data di table load 
+				load_table_active();
+			} );
+		});
 		//Membuat list select level pada halaman di modal form berdasarkan data API pada modal tambah account
 		get_data( URL_SERVICE_BE + "level", {}, function( response ) {
 			var select_level = $('select[name=level]');
@@ -282,13 +297,29 @@ ROUTE.add( BASE_URL_PAGE + 'account/account', function( route ) {
 				select_level.append( option_el );
 			}
 		});
+
 	});
 
 });
 //https://url_app_fe/account/level
 ROUTE.add( BASE_URL_PAGE + 'account/level', function( route ) {
-	LOAD_PAGE_SPA( route );
+	LOAD_PAGE_SPA( route, function() {
+		// Method event untMenambahkan data secara asynchronous
+		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
+			e.preventDefault(); //Menghentikan laju fungsi submit pada form
 
+			var form = $(this);
+			var form_data = form.serialize();
+			var url_endpoint = URL_SERVICE_BE + "level";
+			post_tambah_data( url_endpoint, form_data, function( response ) {
+				console.log(response);
+				var msg = response.msg;
+				Swal.fire( msg );
+				//Refresh data di table load 
+				load_table_active();
+			} );
+		});
+	});
 });
 
 
@@ -365,7 +396,7 @@ ROUTE.add( BASE_URL_PAGE + 'teknisi/project', function( route ) {
 ROUTE.add( BASE_URL_PAGE + 'teknisi/monitoring', function( route ) {
 	LOAD_PAGE_SPA( route, function() {	
 
-		$('body').on('submit', '#form_monitoring', function(e) {
+		$('body').on('submit'+EVENT_NAMESPACE, '#form_monitoring', function(e) {
 			e.preventDefault();
 			var input_id_project = $('input[name=monitoring_id_project]');
 			var id_project = input_id_project.val();

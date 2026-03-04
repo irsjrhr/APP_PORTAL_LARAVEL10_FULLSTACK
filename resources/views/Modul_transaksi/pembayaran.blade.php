@@ -46,78 +46,81 @@
 
 		<div class="row">
 			<div class="col-12" style="max-width: 300px;">
-				<table class="table table_option">
-					<tr>
-						<td style="display: flex;">
-							<button class="btn btn-primary btn_load mr-2">
-								<i class="fas fa-recycle"></i>
-							</button>
-							<button class="btn btn-default btn_tambah_data" data-toggle="modal" data-target="#modal_tambah">
-								<i class="fas fa-plus"></i>
-							</button>
-						</td>
-						<!-- Form Search -->
-						<td>
-							<div class="container_option">
-								<form id="form_search">
-									<div class="form-group">
-										<input type="text" class="form-control" name="search_keyword" placeholder="By Nama Item, Email Pembeli, Nama Pembeli">
-									</div>
-									<button class="btn btn-secondary btn_submit_opt">
-										<i class="fas fa-search"></i>
-									</button>
-								</form>
-							</div>
-						</td>
-						<!-- End Of Form Search -->
+				<div class="table_data_container">
+					
+					<table class="table table_option" data-fungsi="transaksi_pembayaran" data-api-endpoint="{{ env('URL_SERVICE_BE') . "transaksi_pembayaran" }}">
+						<tr>
+							<td style="display: flex;">
+								<button class="btn btn-primary btn_load mr-2">
+									<i class="fas fa-recycle"></i>
+								</button>
+								<button class="btn btn-default btn_tambah_data" data-toggle="modal" data-target="#modal_tambah">
+									<i class="fas fa-plus"></i>
+								</button>
+							</td>
+							<!-- Form Search -->
+							<td>
+								<div class="container_option">
+									<form id="form_search">
+										<div class="form-group">
+											<input type="text" class="form-control" name="search_keyword" placeholder="By Nama Item, Email Pembeli, Nama Pembeli">
+										</div>
+										<button class="btn btn-secondary btn_submit_opt">
+											<i class="fas fa-search"></i>
+										</button>
+									</form>
+								</div>
+							</td>
+							<!-- End Of Form Search -->
 
-						<!-- Form Filter Status -->
-						<td>
-							<div class="container_option">
-								<form class="form_filter" id="form_filter_status">
-									<div class="form-group">
-										<select class="form-control" name="filter_keyword">
-											<option value="active"> Active </option>
-											<option value="disabled"> Disabled </option>
-										</select>
-									</div>
-									<button class="btn btn-warning btn_filter btn_submit_opt">
-										<i class="fas fa-filter"></i>
-									</button>
-								</form>
-							</div>
-						</td>
-						<!-- End Of Form Filter Status -->
+							<!-- Form Filter Status -->
+							<td>
+								<div class="container_option">
+									<form class="form_filter" id="form_filter_status">
+										<div class="form-group">
+											<select class="form-control" name="filter_keyword">
+												<option value="active"> Active </option>
+												<option value="disabled"> Disabled </option>
+											</select>
+										</div>
+										<button class="btn btn-warning btn_filter btn_submit_opt">
+											<i class="fas fa-filter"></i>
+										</button>
+									</form>
+								</div>
+							</td>
+							<!-- End Of Form Filter Status -->
 
-					</tr>
-				</table>
-				<table class="table table_data">
-
-					<thead>
-						<tr class="row_header">
-							<td> <i class="fas fa-cog"></i> </td>
-							<th> No </th>
-							<th> #ID Pembayaran </th>
-							<th> User Admin </th>
-							<th> Nama Item </th>
-							<th> Harga </th>
-							<th> QTY </th>
-							<th> Total Harga </th>
-							<th> Nama Pembeli </th>
-							<th> Alamat Pembeli </th>
-							<th> Email Pembeli </th>
-							<th> Waktu Bayar </th>
-							<th> OrderID Midtrans </th>
-							<th> Status Pembayaran </th>
-							<th> Waktu </th>
-							<th> Status </th>
 						</tr>
-					</thead>
-					<tbody>
-						<!-- Ditambahakam oleh jquery berdarsarkan data loadnya  -->
-					</tbody>
+					</table>
+					<table class="table table_data">
 
-				</table>
+						<thead>
+							<tr class="row_header">
+								<td> <i class="fas fa-cog"></i> </td>
+								<th> No </th>
+								<th> #ID Pembayaran </th>
+								<th> User Admin </th>
+								<th> Nama Item </th>
+								<th> Harga </th>
+								<th> QTY </th>
+								<th> Total Harga </th>
+								<th> Nama Pembeli </th>
+								<th> Alamat Pembeli </th>
+								<th> Email Pembeli </th>
+								<th> Waktu Bayar </th>
+								<th> OrderID Midtrans </th>
+								<th> Status Pembayaran </th>
+								<th> Waktu </th>
+								<th> Status </th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- Ditambahakam oleh jquery berdarsarkan data loadnya  -->
+						</tbody>
+
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

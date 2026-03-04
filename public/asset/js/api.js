@@ -1,15 +1,16 @@
 // UNTUK URL APP BE TERKAIT SERVICE BE BISNIS 
 
-const BASE_URL_PAGE = "http://127.0.0.1:8000/"; 
+var ENV = window.ENV;//DIAMBIL DARI .env laravel di passing ke variabel global window pada footer di index SPA template
+
+const BASE_URL_PAGE = ENV.BASE_URL_PAGE; 
+
 
 // ++++++++++++ CONSTANT REQUEST API SERVICE ++++++++
 // UNTUK URL APP BE TERKAIT SERVICE BE DENGAN CI
 // const URL_SERVICE_CI = "https://app.certara.id/";
-const URL_SERVICE_CI = "http://localhost/My_Script/SCRIPT_PROJECT/client_product/Konsep_OOP/APP_BASE_CI_3/APP_FSM_WAFA/service_ci/";
+const URL_SERVICE_CI = ENV.URL_SERVICE_CI;
 // UNTUK URL APP BE TERKAIT SERVICE BE DENGAN LARAVEL
-const URL_SERVICE_LARAVEL = "http://127.0.0.1:8001/api/";
-
-const URL_SERVICE_BE = URL_SERVICE_LARAVEL;
+const URL_SERVICE_BE = ENV.URL_SERVICE_BE;
 
 // UNTUK URL APP BE TERKAIT SERVICE BE FILE
 const URL_SERVICE_FILE = "http://localhost/My_Script/SCRIPT_PROJECT/client_product/Konsep_OOP/APP_BASE_CI_3/APP_FSM_WAFA/service_file/";

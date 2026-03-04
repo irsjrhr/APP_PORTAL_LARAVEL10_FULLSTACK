@@ -1,6 +1,6 @@
 
 
-<section class="section_content" data-fungsi="account">
+<section class="section_content">
 	<div class="header_page">
 		<h1>
 			Atur Account
@@ -23,95 +23,104 @@
 
 		<div class="row">
 			<div class="col-12" style="max-width: 300px;">
-				<table class="table table_option">
-					<tr>
-						<td style="display: flex;">
-							<button class="btn btn-primary btn_load mr-2">
-								<i class="fas fa-recycle"></i>
-							</button>
-							<button class="btn btn-default btn_tambah_data" data-toggle="modal" data-target="#modal_tambah">
-								<i class="fas fa-plus"></i>
-							</button>
-							<!-- 							<button class="btn btn-warning btn_filter">
-								<i class="fas fa-filter"></i>
-							</button> -->
-						</td>
-						<!-- Form Search -->
-						<td>
-							<div class="container_option">
-								<form id="form_search">
-									<div class="form-group">
-										<input type="text" class="form-control" name="search_keyword" placeholder="By User, Email, Nama">
-									</div>
-									<button class="btn btn-secondary btn_submit_opt">
-										<i class="fas fa-search"></i>
-									</button>
-								</form>
-							</div>
-						</td>
-						<!-- End Of Form Search -->
-
-						<!-- Form Filter Status -->
-						<td>
-							<div class="container_option">
-								<form class="form_filter" id="form_filter_status">
-									<div class="form-group">
-										<select class="form-control" name="filter_keyword">
-											<option value="active"> Active </option>
-											<option value="disabled"> Disabled </option>
-										</select>
-									</div>
-									<button class="btn btn-warning btn_filter btn_submit_opt">
-										<i class="fas fa-filter"></i>
-									</button>
-								</form>
-							</div>
-						</td>
-						<!-- End Of Form Filter Status -->
 
 
-					</tr>
-				</table>
-				<table class="table table_data">
-					<thead>
-						<tr class="row_header">
-							<td> <i class="fas fa-cog"></i> </td>
-							<th> No </th>
-							<th> Profile </th>
-							<th> User Id </th>
-							<th> Email </th>
-							<th> Nama </th>
-							<th> Level </th>
-							<th> Waktu </th>
-							<th> Status </th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<!-- 					<tr>
+				{{-- Table data container --}}
+				<div class="table_data_container" data-fungsi="account" data-api-endpoint="{{ env('URL_SERVICE_BE') . "account" }}">
+					
+					<table class="table table_option">
+						<tr>
+							<td style="display: flex;">
+								<button class="btn btn-primary btn_load mr-2">
+									<i class="fas fa-recycle"></i>
+								</button>
+								<button class="btn btn-default btn_tambah_data" data-toggle="modal" data-target="#modal_tambah">
+									<i class="fas fa-plus"></i>
+								</button>
+								<!-- 							<button class="btn btn-warning btn_filter">
+									<i class="fas fa-filter"></i>
+								</button> -->
+							</td>
+							<!-- Form Search -->
 							<td>
-								<button class="btn btn-default btn_opt"><i class="fas fa-ellipsis-v"></i></button>
-								<div class="menu_opt">
-									<div class="link_opt close_opt">Tutup</div>
-									<a href="/edit/${row.id_user}" class="link_opt">
-										<i class="fas fa-edit"></i> Edit
-									</a>
-									<a href="/delete/${row.id_user}" class="link_opt">
-										<i class="fas fa-trash"></i> Hapus
-									</a>
+								<div class="container_option">
+									<form id="form_search">
+										<div class="form-group">
+											<input type="text" class="form-control" name="search_keyword" placeholder="By User, Email, Nama">
+										</div>
+										<button class="btn btn-secondary btn_submit_opt">
+											<i class="fas fa-search"></i>
+										</button>
+									</form>
 								</div>
 							</td>
-							<td>${i + 1}</td>
-							<td><img src="asset/gam/logo.png" class="profile"></td>
-							<td>${row.user}</td>
-							<td>${row.nama}</td>
-							<td>${row.level}</td>
-							<td>${row.waktu}</td>
-							<td><div class="label ${statusClass}">${row.status}</div></td>
-						</tr>`; -->
-						<!-- Disi oleh ajax -->
-					</tbody>
-				</table>
+							<!-- End Of Form Search -->
+
+							<!-- Form Filter Status -->
+							<td>
+								<div class="container_option">
+									<form class="form_filter" id="form_filter_status">
+										<div class="form-group">
+											<select class="form-control" name="filter_keyword">
+												<option value="active"> Active </option>
+												<option value="disabled"> Disabled </option>
+											</select>
+										</div>
+										<button class="btn btn-warning btn_filter btn_submit_opt">
+											<i class="fas fa-filter"></i>
+										</button>
+									</form>
+								</div>
+							</td>
+							<!-- End Of Form Filter Status -->
+						</tr>
+					</table>
+					<table class="table table_data">
+						<thead>
+							<tr class="row_header">
+								<td> <i class="fas fa-cog"></i> </td>
+								<th> No </th>
+								<th> Profile </th>
+								<th> User Id </th>
+								<th> Email </th>
+								<th> Nama </th>
+								<th> Level </th>
+								<th> Waktu </th>
+								<th> Status </th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<!-- 					<tr>
+								<td>
+									<button class="btn btn-default btn_opt"><i class="fas fa-ellipsis-v"></i></button>
+									<div class="menu_opt">
+										<div class="link_opt close_opt">Tutup</div>
+										<a href="/edit/${row.id_user}" class="link_opt">
+											<i class="fas fa-edit"></i> Edit
+										</a>
+										<a href="/delete/${row.id_user}" class="link_opt">
+											<i class="fas fa-trash"></i> Hapus
+										</a>
+									</div>
+								</td>
+								<td>${i + 1}</td>
+								<td><img src="asset/gam/logo.png" class="profile"></td>
+								<td>${row.user}</td>
+								<td>${row.nama}</td>
+								<td>${row.level}</td>
+								<td>${row.waktu}</td>
+								<td><div class="label ${statusClass}">${row.status}</div></td>
+							</tr>`; -->
+							<!-- Disi oleh ajax -->
+						</tbody>
+					</table>
+
+				</div>
+				{{-- End Of Table data container --}}
+
+
+
 			</div>
 		</div>
 	</div>
