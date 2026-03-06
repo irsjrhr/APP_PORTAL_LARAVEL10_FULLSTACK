@@ -137,19 +137,18 @@ header{
 .content{
 	position: relative;
 	padding: 0;
+	flex: 1;
+	/*background: green;*/
 }
-
 
 .content .main_container{
 	padding: 20px;
-	width: 100%;
+	/*width: 100%;*/
 	height: auto;
 	overflow: auto;
-	max-width: 80%;
+	/*max-width: 100%;*/
 	/*background: red;*/
 }
-
-
 .box_dashboard{
 	width: 100%;
 	padding: 0;
@@ -264,7 +263,7 @@ header{
 }
 
 /*Disini sidebar sudah responsive dan fixed satu layar*/
-@media(max-width: 814px){
+@media(max-width: 1118px){
 	.col_sidebar .sidebar{
 		position: relative !important;
 		width: 100%;
@@ -284,7 +283,16 @@ header{
 		z-index: 9999;
 		display: none;
 	}
-
+	.row_page{
+		display:block
+	}
+	.content{
+		width: 100%;
+		flex: unset;
+	}
+	.scroll_dashboard{
+		width: 100% !important;
+	}
 }
 /*Responsive sidebar mobile*/
 @media( max-width: 450px){

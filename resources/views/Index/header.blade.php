@@ -84,9 +84,9 @@
 	</header>
 
 	<!-- Container page -->
-	<div class="container-fluid container_page">
+	<div class="container_page">
 		<!-- Row page -->
-		<div class="row row_page">
+		<div class="row_page" style="display:flex">
 			<!-- Sidebar -->
 			<div class="col_sidebar">
 				<div class="sidebar">
@@ -178,7 +178,7 @@
 			</div>
 			<!-- End Of Sidebar -->
 			<!-- Content -->
-			<div class="col content">
+			<div class="content">
 
 				<!-- Load animasi - akan muncul dan menghilang sesuai dengan perilaku load_page  -->
 				<div class="animasi_loadPage">

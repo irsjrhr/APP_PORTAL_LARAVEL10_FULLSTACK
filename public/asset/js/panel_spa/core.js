@@ -162,7 +162,7 @@ function create_animasiLoadPageEl() {
 	trace();
 
 	//Ambil element yang sudah pernah ada di col content utama
-	var col_content = $('.col.content');
+	var col_content = $('.content');
 	var animasi_loadPageEl = col_content.find('.animasi_loadPage').html();
 	//Buat yang baru 
 	var new_animasi_loadPage = `
