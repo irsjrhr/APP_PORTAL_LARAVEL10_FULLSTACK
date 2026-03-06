@@ -164,7 +164,7 @@ function LOAD_PAGE_SPA( target_page = BASE_URL_PAGE, callback = false ) {
 	var main_container = $('.main_container');
 	main_container.html();
 	//Melakukan load pada halaman baru yaitu juga menambahkan section_content yang baru pada halaman tersebut
-	var animasi_loadPageEl = $('.content').find('.animasi_loadPage'); 
+	var animasi_loadPageEl = $('.content_page').find('.animasi_loadPage'); 
 	animasi_loadPage("show", animasi_loadPageEl );
 	console.log( "Target page", target_page );
 	main_container.load( target_page, function(responseText, statusText, xhr) {

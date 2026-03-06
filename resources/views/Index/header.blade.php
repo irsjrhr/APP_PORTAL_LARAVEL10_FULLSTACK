@@ -16,7 +16,7 @@
 	<body>
 
 		<style type="text/css">	
-		.content .nav_header .col_left{
+		.col_content .nav_header .col_left{
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -178,7 +178,7 @@
 			</div>
 			<!-- End Of Sidebar -->
 			<!-- Content -->
-			<div class="content">
+			<div class="content content_page">
 
 				<!-- Load animasi - akan muncul dan menghilang sesuai dengan perilaku load_page  -->
 				<div class="animasi_loadPage">

@@ -33,7 +33,7 @@ body{
 header{
 	padding-top: 0;
 }
-.content .nav_header{
+.content.content_page .nav_header{
 	position: fixed;
 	/*width: inherit;*/
 	height: inherit;
@@ -133,8 +133,7 @@ header{
 }
 
 
-
-.content{
+.content.content_page{
 	position: relative;
 	padding: 0;
 	flex: 1;
@@ -291,7 +290,7 @@ header{
 		flex: unset;
 	}
 	.scroll_dashboard{
-		width: 100% !important;
+		width: ;
 	}
 }
 /*Responsive sidebar mobile*/

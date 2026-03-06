@@ -63,7 +63,7 @@ $(document).ready(function(e) {
 	$('body').on('click', '.link_read' ,function(e) {
 		var link_read = $(this);
 		var box_deskripsi = link_read.parents('.box_deskripsi');
-		var content = box_deskripsi.find('.content');
+		var content = box_deskripsi.find('.content_page');
 		if( content.is('.text_flow_multi3') ){
 			//Jika deskripsi text singkat, atau ada text flow multi nya, maka tutup dan jadikan text pendek 
 			link_read.text('Close');
@@ -349,7 +349,7 @@ function downloadFile(url, fileName) {
 }
 function sesuaikan_nav_header() {
 	nav_header = $('.nav_header').not('.not_inherit_sidebar');
-	var parent_patokan = nav_header.parents('.content');
+	var parent_patokan = nav_header.parents('.content_page');
 	var lebar_parent = parent_patokan.css('width');
 	nav_header.css('width', lebar_parent);
 }
