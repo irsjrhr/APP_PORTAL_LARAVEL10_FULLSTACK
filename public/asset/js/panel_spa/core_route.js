@@ -30,7 +30,7 @@ $(document).ready(function(e) {
 function CLEANUP_EVENT_NAMESPACE( route ) {
 	console.warn(`EVENT NAME SPACE ${EVENT_NAMESPACE} URL ROUTE!
 		${ route } DIHAPUS!!!
-		`);
+`);
 	$(document).off(EVENT_NAMESPACE);
 	$('body ').off(EVENT_NAMESPACE);
 }
@@ -42,7 +42,7 @@ function ROUTE_INIT( route, load_spa = false ) {
 }
 const ROUTE = {
 	QUE_ROUTE : [],   
-	add : function( route = "{path}/{path2}/{path3}", callback = false, load_spa = false ) {
+	add : function( route_url = "{path}/{path2}/{path3}", callback = false, load_spa = false ) {
 
 		//Handling Default Type Callback
 		if (typeof callback !== 'function') {
@@ -52,10 +52,10 @@ const ROUTE = {
 		}
 
 		//++++++++ Build Object Route With Callback Triger +++++++
-		var page = new ROUTE_INIT( route, load_spa );
+		var page = new ROUTE_INIT( route_url, load_spa );
 		// Buat perilaku page ketika di triger dari method callback yang di daftarkan berdasarkan routenya
 		page.callback_route = function() {
-			callback( route );
+			callback( route_url );
 		};
 
 		//++++++++ Sign Object Route Yang Sudah Di Buil +++++++
@@ -140,9 +140,9 @@ function LOAD_PAGE_SPA( target_page = BASE_URL_PAGE, callback = false ) {
 	//SET DEBUG URL ACTIVE
 	LOAD_PAGE_URL = target_page; 
 	console.groupCollapsed(
-		`%c+[++++ LOAD_PAGE_SPA with route ${ LOAD_PAGE_URL  } +++++]`,
-		'color:white; background:#007bff; padding:2px 6px; border-radius:4px;'
-		);
+`%c+[++++ LOAD_PAGE_SPA with route ${ LOAD_PAGE_URL  } +++++]`,
+'color:white; background:#007bff; padding:2px 6px; border-radius:4px;'
+);
 	trace();
 
 	//Handling Error Callback Type
@@ -270,36 +270,63 @@ function close_link_modul(link_modul_target){
 
 
 /*
+===================================================================================================
+INGAT!! 
+BASE_URL_PAGE = https://url_apps/
+=> Yang di set di .env dan di passing dari laravel ke konfig JS itu di resource/Index/index.blade sebagai variabel global
+===================================================================================================
+
 // === CONTOH MENDAFTARKAN ROUTE SPA CALLBACK BASIC 
-ROUTE.add( '{URL_PATH_TERDAFTAR_DI_CONTROLLER}/path', function( route ) {
+ROUTE.add( BASE_URL_PAGE + 'path_fe1/path_fe2', function( route_url ) {
 	alert('EVENT TRIGER CALLBACK');
 });
 
 // === CONTOH MENDAFTARKAN ROUTE SPA CALLBACK DENGAN LOAD SPA 
-ROUTE.add( '{URL_PATH_TERDAFTAR_DI_CONTROLLER}/path', function( route ) {
-	LOAD_PAGE_SPA( route );
+ROUTE.add( BASE_URL_PAGE + 'path_fe1/path_fe2', function( route_url ) {
+	LOAD_PAGE_SPA( route_url );
 });
 
 // === CONTOH MENDAFTARKAN ROUTE SPA CALLBACK DENGAN LOAD SPA BER CALLBACK 
-ROUTE.add( '{URL_PATH_TERDAFTAR_DI_CONTROLLER}/path', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr  ){
+ROUTE.add( BASE_URL_PAGE + 'path_fe1/path_fe2', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr  ){
 		alert('EVENT CALLBACK SETELAH LOAD SPA');
 	});
 });
+
+
+
+
+
 */
+
+
+
+// // Skema binding route dengan suatu class dan method group
+// class User{
+// 	method_url1(){
+
+// 	},
+// 	method_url2(){
+
+// 	}
+// }
+// Route.addController( new User, function( RouteBind ){
+// 	RouteBind.add(BASE_URL_PAGE + 'method_url',  'method_url1')
+// 	RouteBind.add(BASE_URL_PAGE + 'method_url',  'method_url2')
+// });
 
 
 //----- ADMIN CONTROLLER ROUTE CALLBACK ----
 //https://url_app_fe/dashboard
-ROUTE.add( BASE_URL_PAGE + 'dashboard', function( route ) {
-	LOAD_PAGE_SPA( route );
+ROUTE.add( BASE_URL_PAGE + 'dashboard', function( route_url ) {
+	LOAD_PAGE_SPA( route_url );
 });
 
 
 //==================== MODUL ACCOUNT ===================
 //https://url_app_fe/account/account
-ROUTE.add( BASE_URL_PAGE + 'account/account', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'account/account', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 
 		// Method event Menambahkan data secara asynchronous
 		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
@@ -323,8 +350,8 @@ ROUTE.add( BASE_URL_PAGE + 'account/account', function( route ) {
 
 });
 //https://url_app_fe/account/level
-ROUTE.add( BASE_URL_PAGE + 'account/level', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'account/level', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 		// Method event untMenambahkan data secara asynchronous
 		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
 			e.preventDefault(); //Menghentikan laju fungsi submit pada form
@@ -342,8 +369,8 @@ ROUTE.add( BASE_URL_PAGE + 'account/level', function( route ) {
 
 //==================== MODUL FSM ===================
 //https://url_app_fe/fsm/teknisi
-ROUTE.add( BASE_URL_PAGE + 'fsm/teknisi', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'fsm/teknisi', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 		// Method event untMenambahkan data secara asynchronous
 		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
 			e.preventDefault(); //Menghentikan laju fungsi submit pada form
@@ -356,8 +383,8 @@ ROUTE.add( BASE_URL_PAGE + 'fsm/teknisi', function( route ) {
 
 });
 //https://url_app_fe/fsm/produk
-ROUTE.add( BASE_URL_PAGE + 'fsm/produk', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'fsm/produk', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 		// Method event untMenambahkan data secara asynchronous
 		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
 			e.preventDefault(); //Menghentikan laju fungsi submit pada form
@@ -371,8 +398,8 @@ ROUTE.add( BASE_URL_PAGE + 'fsm/produk', function( route ) {
 
 });
 //https://url_app_fe/fsm/project
-ROUTE.add( BASE_URL_PAGE + 'fsm/project', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'fsm/project', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 		// Method event untMenambahkan data secara asynchronous
 		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
 			e.preventDefault(); //Menghentikan laju fungsi submit pada form
@@ -385,14 +412,14 @@ ROUTE.add( BASE_URL_PAGE + 'fsm/project', function( route ) {
 
 });
 //https://url_app_fe/fsm/laporan
-ROUTE.add( BASE_URL_PAGE + 'fsm/laporan', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'fsm/laporan', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 
 	});
 });
 //https://url_app_fe/fsm/monitoring
-ROUTE.add( BASE_URL_PAGE + 'fsm/monitoring', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'fsm/monitoring', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 
 	});
 });
@@ -401,8 +428,8 @@ ROUTE.add( BASE_URL_PAGE + 'fsm/monitoring', function( route ) {
 
 //==================== MODUL ADMIN ===================
 //https://url_app_fe/transaksi/transaksi_kategori
-ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_kategori', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_kategori', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 		// Method event untMenambahkan data secara asynchronous
 		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
 			e.preventDefault(); //Menghentikan laju fungsi submit pada form
@@ -414,8 +441,8 @@ ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_kategori', function( route ) {
 	});
 });
 //https://url_app_fe/transaksi/transaksi_pemasukan
-ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_pemasukan', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_pemasukan', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 		// Method event untMenambahkan data secara asynchronous
 		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
 			e.preventDefault(); //Menghentikan laju fungsi submit pada form
@@ -427,8 +454,8 @@ ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_pemasukan', function( route ) {
 	});
 });
 //https://url_app_fe/transaksi/transaksi_pengeluaran
-ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_pengeluaran', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_pengeluaran', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 		// Method event untMenambahkan data secara asynchronous
 		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
 			e.preventDefault(); //Menghentikan laju fungsi submit pada form
@@ -440,8 +467,8 @@ ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_pengeluaran', function( route ) 
 	});
 });
 //https://url_app_fe/transaksi/transaksi_pembayaran
-ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_pembayaran', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_pembayaran', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 		// Method event untMenambahkan data secara asynchronous
 		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
 			e.preventDefault(); //Menghentikan laju fungsi submit pada form
@@ -458,12 +485,12 @@ ROUTE.add( BASE_URL_PAGE + 'transaksi/transaksi_pembayaran', function( route ) {
 
 //==================== MODUL TEKNISI ===================
 //https://url_app_fe/teknisi/dashboard
-ROUTE.add( BASE_URL_PAGE + 'teknisi/dashboard', function( route ) {
-	LOAD_PAGE_SPA( route );
+ROUTE.add( BASE_URL_PAGE + 'teknisi/dashboard', function( route_url ) {
+	LOAD_PAGE_SPA( route_url );
 });
 //https://url_app_fe/teknisi/project
-ROUTE.add( BASE_URL_PAGE + 'teknisi/project', function( route ) {
-	LOAD_PAGE_SPA( route, function( responseText, statusText, xhr ) {
+ROUTE.add( BASE_URL_PAGE + 'teknisi/project', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function( responseText, statusText, xhr ) {
 		// Method event untMenambahkan data secara asynchronous
 		$('body').on('submit'+EVENT_NAMESPACE , '#modal_tambah form', function(e) {
 			e.preventDefault(); //Menghentikan laju fungsi submit pada form
@@ -475,8 +502,8 @@ ROUTE.add( BASE_URL_PAGE + 'teknisi/project', function( route ) {
 	});
 });
 //https://url_app_fe/teknisi/monitoring
-ROUTE.add( BASE_URL_PAGE + 'teknisi/monitoring', function( route ) {
-	LOAD_PAGE_SPA( route, function() {	
+ROUTE.add( BASE_URL_PAGE + 'teknisi/monitoring', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function() {	
 
 		$('body').on('submit'+EVENT_NAMESPACE, '#form_monitoring', function(e) {
 			e.preventDefault();
@@ -506,12 +533,12 @@ ROUTE.add( BASE_URL_PAGE + 'teknisi/monitoring', function( route ) {
 
 //==================== MODUL USER ===================
 //https://url_app_fe/user/dashboard
-ROUTE.add( BASE_URL_PAGE + 'user/dashboard', function( route ) {
-	LOAD_PAGE_SPA( route );
+ROUTE.add( BASE_URL_PAGE + 'user/dashboard', function( route_url ) {
+	LOAD_PAGE_SPA( route_url );
 });
 //https://url_app_fe/user/profile
-ROUTE.add( BASE_URL_PAGE + 'user/profile', function( route ){
-	LOAD_PAGE_SPA( route, function() {
+ROUTE.add( BASE_URL_PAGE + 'user/profile', function( route_url ){
+	LOAD_PAGE_SPA( route_url, function() {
 		//Menampilkan profile pada card profile 
 		get_row(URL_SERVICE_BE + "account", { by_user : get_userLogin() }, function(response ) {
 			// ===============================
@@ -549,11 +576,11 @@ ROUTE.add( BASE_URL_PAGE + 'user/profile', function( route ){
 });
 //https://url_app_fe/user/project
 ROUTE.add( BASE_URL_PAGE + 'user/project', function(route) {
-	LOAD_PAGE_SPA( route );
+	LOAD_PAGE_SPA( route_url );
 });
 //https://url_app_fe/user/tambah_project
-ROUTE.add( BASE_URL_PAGE + 'user/tambah_project', function( route ) {
-	LOAD_PAGE_SPA( route, function() {
+ROUTE.add( BASE_URL_PAGE + 'user/tambah_project', function( route_url ) {
+	LOAD_PAGE_SPA( route_url, function() {
 		//Menampilkan list produk pada option di form tambah project pada form 
 		var form_tambah_project = $('#form_tambah_project'); 
 		var select_option_produk = form_tambah_project.find('select[name=id_produk]');
@@ -774,24 +801,24 @@ ROUTE.add( BASE_URL_PAGE + 'user/tambah_project', function( route ) {
 				<p> ${ jarak_km } km dari jarak kamu </p>
 				<button type="button" class="btn btn-success btn_pilih_teknisi"> Pilih </button>
 				</div>
-				</div>`;
+			</div>`;
 
 				//Tambahkan cardnya 
-				el_row_teknisi.append( el_card_teknisi );
-			}
-
-
-
+			el_row_teknisi.append( el_card_teknisi );
 		}
 
 
 
-	});
+	}
+
+
+
+});
 
 });
 //https://url_app_fe/user/monitoring
 ROUTE.add( BASE_URL_PAGE + 'user/monitoring', function(route) {
-	LOAD_PAGE_SPA( route, function() {
+	LOAD_PAGE_SPA( route_url, function() {
 
 		$('body').on('submit'+EVENT_NAMESPACE, '#form_monitoring', function(e) {
 
