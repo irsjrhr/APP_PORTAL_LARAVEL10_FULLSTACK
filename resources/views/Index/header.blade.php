@@ -96,80 +96,398 @@
 
 					{{-- container modul menu --}}
 					<div class="container-fluid container_modul_menu">
-						{{-- Loop data sidebar - modul menu --}}
-						@foreach ($data_sidebar as $row_sidebar)
-						@php
-						$jenis_modul = $row_sidebar['jenis_modul'];
-						@endphp
-
-						@if ( $jenis_modul == "MODUL" )
-						{{-- JIKA JENIS MODUL NYA MODUL --}}
-						{{-- Row Modul --}}
-						@php
-						$nama_modul = $row_sidebar['nama_modul'];
-						$data_modul_menu = $row_sidebar['data_modul_menu'];
-						@endphp
+					
+						{{-- Row Menu - Link Menu --}}
+						<div class="row row_menu link_menu" data-page="{{asset('dashboard')}}">
+							<div class="col-1 menu_logo">
+								<i class="fas fa-th-large"></i>
+							</div>
+							<div class="col menu_text">
+								Dashboard
+							</div>
+						</div>
+						
+						{{--  Row Modul - Modul Account --}}
 						<div class="row_modul link_modul">
-							{{-- row modul header --}}
+							
 							<div class="row row_modul_header mb-2">
 								<div class="col-1 menu_logo">
-									<i class="{{ $row_sidebar['icon'] }} icon_modul"></i>
+									<i class="fas fa-folder-open icon_modul"></i>
 								</div>
 								<div class="col menu_text">
-									{{$nama_modul}}
+									Modul Account
+									<span class="icon_indicator">
+										<i class="fas fa-chevron-down"></i>
+									</span>
+								</div>
+							</div>
+							
+
+							{{-- Row Container Menu - Loop Menu --}}
+							<div class="row row_container_menu">
+								{{-- Col Container Menu --}}
+								<div class="col-12 col_container_menu">
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu active" data-page="{{asset('account/level')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-key"></i>
+										</div>
+										<div class="col menu_text">
+											Atur Level
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('account/account')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-users"></i>
+										</div>
+										<div class="col menu_text">
+											Atur Account
+										</div>
+									</div>
+										
+
+
+									{{--  Row Sub Modul --}}
+									<div class="row_modul link_modul">
+
+										<div class="row row_modul_header mb-2">
+											<div class="col-1 menu_logo">
+												<i class="fas fa-folder-open icon_modul"></i>
+											</div>
+											<div class="col menu_text">
+												Sub Modul
+												<span class="icon_indicator">
+													<i class="fas fa-chevron-down"></i>
+												</span>
+											</div>
+										</div>
+
+										{{-- Row Container Menu - Loop Menu --}}
+										<div class="row row_container_menu">
+											{{-- Col Container Menu --}}
+											<div class="col-12 col_container_menu">
+
+												{{-- Row Menu - Link Menu --}}
+												<div class="row row_menu link_menu active" data-page="{{asset('account/level')}}">
+													<div class="col-1 menu_logo">
+														<i class="fas fa-key"></i>
+													</div>
+													<div class="col menu_text">
+														Fitur 1
+													</div>
+												</div>
+
+												{{-- Row Menu - Link Menu --}}
+												<div class="row row_menu link_menu" data-page="{{asset('account/account')}}">
+													<div class="col-1 menu_logo">
+														<i class="fas fa-users"></i>
+													</div>
+													<div class="col menu_text">
+														Fitur 2
+													</div>
+												</div>
+
+
+											</div>
+
+										</div>
+
+									</div>
+									{{--  End Of Sub Row Modul --}}
+
+								</div>
+								
+							</div>
+							
+						</div>
+						{{--  End Of Row Modul - Modul Account --}}
+
+						{{--  Row Modul - Modul FSM --}}
+						<div class="row_modul link_modul">
+							
+							<div class="row row_modul_header mb-2">
+								<div class="col-1 menu_logo">
+									<i class="fas fa-folder-open icon_modul"></i>
+								</div>
+								<div class="col menu_text">
+									Modul FSM
 									<span class="icon_indicator">
 										<i class="fas fa-chevron-right"></i>
 									</span>
 								</div>
 							</div>
-							{{-- end of row modul header --}}
+							
 
-							{{-- row container menu --}}
+							{{-- Row Container Menu - Loop Menu --}}
 							<div class="row row_container_menu">
 								{{-- Col Container Menu --}}
 								<div class="col-12 col_container_menu">
-									{{-- Loop Row Menu --}}
-									@foreach ($data_modul_menu as $row_menu)
+									
 									{{-- Row Menu - Link Menu --}}
-									<div class="row row_menu link_menu" data-page="{{ $row_menu['url'] }}">
+									<div class="row row_menu link_menu" data-page="{{asset('fsm/teknisi')}}">
 										<div class="col-1 menu_logo">
-											<i class="{{ $row_menu['icon'] }}"></i>
+											<i class="fas fa-hard-hat"></i>
 										</div>
 										<div class="col menu_text">
-											{{ $row_menu['menu'] }}
+											Atur Teknisi
 										</div>
 									</div>
-									{{-- End Of Row Menu - Link Menu --}}
-									@endforeach
-									{{-- End Of Loop Row Menu --}}
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('fsm/produk')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-box"></i>
+										</div>
+										<div class="col menu_text">
+											Atur Produk
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('fsm/project')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-tasks"></i>
+										</div>
+										<div class="col menu_text">
+											Atur Project
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('fsm/laporan')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-file-alt"></i>
+										</div>
+										<div class="col menu_text">
+											Atur Laporan
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('fsm/monitoring')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-tv"></i>
+										</div>
+										<div class="col menu_text">
+											Monitoring
+										</div>
+									</div>
+
+
 								</div>
-								{{-- End Of Col Container Menu --}}
+								
 							</div>
-							{{-- end of row container menu --}}
+							
 						</div>
-						{{-- End Of Row Modul --}}
-						{{-- END OF JIKA JENIS MODUL NYA MODUL --}}
+						{{-- End Of Row Modul - Modul FSM --}}
+						
 
-						@elseif ( $jenis_modul = "MENU" )
-						{{-- JIKA JENIS MODUL NYA MENU --}}
-						{{-- Row Menu - Link Menu --}}
-						@php
-						$row_menu = $row_sidebar;
-						@endphp
-						<div class="row row_menu link_menu" data-page="{{ $row_menu['url'] }}">
-							<div class="col-1 menu_logo">
-								<i class="{{ $row_menu['icon'] }}"></i>
+						{{-- Row Modul - Modul Transaksi --}}
+						<div class="row_modul link_modul">
+							
+							<div class="row row_modul_header mb-2">
+								<div class="col-1 menu_logo">
+									<i class="fas fa-folder-open icon_modul"></i>
+								</div>
+								<div class="col menu_text">
+									Modul Transaksi
+									<span class="icon_indicator">
+										<i class="fas fa-chevron-right"></i>
+									</span>
+								</div>
 							</div>
-							<div class="col menu_text">
-								{{ $row_menu['menu'] }}
+							
+
+							{{-- Row Container Menu - Loop Menu --}}
+							<div class="row row_container_menu">
+								{{-- Col Container Menu --}}
+								<div class="col-12 col_container_menu">
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('transaksi/transaksi_kategori')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-filter"></i>
+										</div>
+										<div class="col menu_text">
+											Atur Transaksi Kategori
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('transaksi/transaksi_pemasukan')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-cash-register"></i>
+										</div>
+										<div class="col menu_text">
+											Atur Pemasukan
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('transaksi/transaksi_pengeluaran')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-money-bill"></i>
+										</div>
+										<div class="col menu_text">
+											Atur Pengeluaran
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('transaksi/transaksi_pembayaran')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-cash-register"></i>
+										</div>
+										<div class="col menu_text">
+											Atur Pembayaran
+										</div>
+									</div>
+									
+
+								</div>
+								
 							</div>
+							
 						</div>
-						{{-- End Of Row Menu - Link Menu --}}
-						{{-- JIKA JENIS MODUL NYA MENU --}}
-						@endif
+						{{-- End Of Row Modul - Modul Transaksi --}}
+						
 
-						@endforeach
-						{{-- End Of Loop data sidebar  --}}
+						{{-- Row Modul - Modul Teknisi --}}
+						<div class="row_modul link_modul">
+							
+							<div class="row row_modul_header mb-2">
+								<div class="col-1 menu_logo">
+									<i class="fas fa-folder-open icon_modul"></i>
+								</div>
+								<div class="col menu_text">
+									Modul Teknisi ( FSM )
+									<span class="icon_indicator">
+										<i class="fas fa-chevron-right"></i>
+									</span>
+								</div>
+							</div>
+							
+
+							{{-- Row Container Menu - Loop Menu --}}
+							<div class="row row_container_menu">
+								{{-- Col Container Menu --}}
+								<div class="col-12 col_container_menu">
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('teknisi/dashboard')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-tachometer-alt"></i>
+										</div>
+										<div class="col menu_text">
+											Dashboard
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('teknisi/project')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-clipboard-list"></i>
+										</div>
+										<div class="col menu_text">
+											List Project
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('teknisi/monitoring')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-map-marked-alt"></i>
+										</div>
+										<div class="col menu_text">
+											Monitoring Project
+										</div>
+									</div>
+									
+
+								</div>
+								
+							</div>
+							
+						</div>
+						{{-- End Of Row Modul - Modul Teknisi --}}
+
+						{{-- Row Modul - Modul User --}}
+						<div class="row_modul link_modul">
+							
+							<div class="row row_modul_header mb-2">
+								<div class="col-1 menu_logo">
+									<i class="fas fa-folder-open icon_modul"></i>
+								</div>
+								<div class="col menu_text">
+									Modul User ( FSM )
+									<span class="icon_indicator">
+										<i class="fas fa-chevron-right"></i>
+									</span>
+								</div>
+							</div>
+							
+
+							{{-- Row Container Menu - Loop Menu --}}
+							<div class="row row_container_menu">
+								{{-- Col Container Menu --}}
+								<div class="col-12 col_container_menu">
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('user/dashboard')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-tachometer-alt"></i>
+										</div>
+										<div class="col menu_text">
+											Dashboard
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('user/project')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-clipboard-list"></i>
+										</div>
+										<div class="col menu_text">
+											List Project
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('user/tambah_project')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-plus-circle"></i>
+										</div>
+										<div class="col menu_text">
+											Tambah Project
+										</div>
+									</div>
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="{{asset('user/monitoring')}}">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-eye"></i>
+										</div>
+										<div class="col menu_text">
+											Monitoring Project
+										</div>
+									</div>
+
+
+
+
+
+
+									
+
+								</div>
+								
+							</div>
+							
+						</div>
+						{{-- End Of Row Modul - Modul User --}}
 
 					</div>
 					{{-- end of container modul menu --}}

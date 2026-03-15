@@ -11,11 +11,18 @@ class Menu{
     $data_sidebar = [   
     //Kalo Row Jenis Row Modulnya adalah MODUL
     [
+    "jenis_modul" => "MODUL",
     "nama_modul" => "Modul 1",
-    "data_modul_menu" => [ [ "menu" => "", "icon" => "", "url" => "" ], [ "menu" => "", "icon" => "", "url" => ""] ]
+    "data_modul_menu" => [ 
+        [ "menu" => "", "icon" => "", "url" => "" ], 
+        [ "menu" => "", "icon" => "", "url" => ""] 
+    ]
     ], 
     //Kalo Row Jenis Row Modulnya adalah MENU
-    [ "menu" => "", "icon" => "", "url" => "" ], [ "menu" => "", "icon" => "", "url" => ""]
+    [ 
+    "menu" => "", 
+    "icon" => "", 
+    "url" => "" ], [ "menu" => "", "icon" => "", "url" => ""]
     ],
     */
 

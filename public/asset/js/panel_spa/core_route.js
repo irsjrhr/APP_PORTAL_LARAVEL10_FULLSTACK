@@ -221,13 +221,15 @@ function load_link_modul( row_modul_header_target ) {
 	if ( link_modul_target.is('.active') == false ) {
 		//Jika link modul tidak aktif dan tidak terlihat, maka aktifkan dan tampilkan
 
-		//Menghilangkan terlebih dahulu seluruh modul yang bukan target dan yang tidak punya child mennu yang sedang aktif
-		var link_modul_hasMenuActive =  $('.link_menu.active').parents('.link_modul');
-		var link_modul_NotMenuActive = $('.link_modul').not( link_modul_hasMenuActive );
-		close_link_modul( link_modul_NotMenuActive );
-
 		//Munculkan link modul target dan Ubah Icon Indicator Menjadi Chevron Ke Bawah
 		open_link_modul( link_modul_target );
+
+		//Menghilangkan terlebih dahulu seluruh modul kecuali link modul target dan yang  punya child mennu yang sedang aktif
+		var link_modul_hasMenuActive =  $('.link_menu.active').parents('.link_modul');
+		var link_modul_NotMenuActiveAndTarget = $('.link_modul').not( link_modul_hasMenuActive ).not( link_modul_target );
+		close_link_modul( link_modul_NotMenuActiveAndTarget );
+
+
 
 	}else{
 		//Jika link modul aktif, maka hilangkan link modul tersebut jika dia tidak punya menu active 
