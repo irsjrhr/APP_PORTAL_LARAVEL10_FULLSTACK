@@ -18,11 +18,21 @@ class Menu{
         [ "menu" => "", "icon" => "", "url" => ""] 
     ]
     ], 
+    
     //Kalo Row Jenis Row Modulnya adalah MENU
     [ 
     "menu" => "", 
     "icon" => "", 
-    "url" => "" ], [ "menu" => "", "icon" => "", "url" => ""]
+    "url" => "" 
+    ], 
+    [ 
+    "menu" => "", 
+    "icon" => "", 
+    "url" => ""
+    ]
+
+
+
     ],
     */
 

@@ -96,7 +96,7 @@
 
 					{{-- container modul menu --}}
 					<div class="container-fluid container_modul_menu">
-					
+
 						{{-- Row Menu - Link Menu --}}
 						<div class="row row_menu link_menu" data-page="{{asset('dashboard')}}">
 							<div class="col-1 menu_logo">
@@ -147,11 +147,11 @@
 											Atur Account
 										</div>
 									</div>
-										
+
 
 
 									{{--  Row Sub Modul --}}
-									<div class="row_modul link_modul">
+									<div class="row_modul sub_modul link_modul">
 
 										<div class="row row_modul_header mb-2">
 											<div class="col-1 menu_logo">
@@ -171,22 +171,50 @@
 											<div class="col-12 col_container_menu">
 
 												{{-- Row Menu - Link Menu --}}
-												<div class="row row_menu link_menu active" data-page="{{asset('account/level')}}">
+												<div class="row row_menu link_menu" data-page="{{asset('sub_modu/fitur')}}">
 													<div class="col-1 menu_logo">
-														<i class="fas fa-key"></i>
+														<i class="fas fa-users"></i>
 													</div>
 													<div class="col menu_text">
 														Fitur 1
 													</div>
 												</div>
 
+
+											</div>
+
+										</div>
+
+									</div>
+									{{--  End Of Sub Row Modul --}}
+
+									{{--  Row Sub Modul --}}
+									<div class="row_modul sub_modul link_modul">
+
+										<div class="row row_modul_header mb-2">
+											<div class="col-1 menu_logo">
+												<i class="fas fa-folder-open icon_modul"></i>
+											</div>
+											<div class="col menu_text">
+												Sub Modul 2
+												<span class="icon_indicator">
+													<i class="fas fa-chevron-down"></i>
+												</span>
+											</div>
+										</div>
+
+										{{-- Row Container Menu - Loop Menu --}}
+										<div class="row row_container_menu">
+											{{-- Col Container Menu --}}
+											<div class="col-12 col_container_menu">
+
 												{{-- Row Menu - Link Menu --}}
-												<div class="row row_menu link_menu" data-page="{{asset('account/account')}}">
+												<div class="row row_menu link_menu" data-page="{{asset('sub_modu/fitur')}}">
 													<div class="col-1 menu_logo">
 														<i class="fas fa-users"></i>
 													</div>
 													<div class="col menu_text">
-														Fitur 2
+														Fitur 1
 													</div>
 												</div>
 

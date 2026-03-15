@@ -89,9 +89,7 @@ header{
 	padding: 0;
 	padding-left: 0;
 }
-.link_modul.active .col_container_menu{
-	max-height: 300px;
-}
+
 .link_menu.row_menu{
 	/*background: red;*/
 	padding: 10px;
@@ -105,15 +103,6 @@ header{
 	color: #000;
 	text-decoration: none;
 	transition: .2s;
-}
-.link_menu:hover,
-.link_menu.active{
-	text-decoration: none;
-	background: darkcyan;
-}
-.link_menu:hover *,
-.link_menu.active *{
-	color: #fff;
 }
 .row_menu .menu_logo,
 .menu_logo{
@@ -141,6 +130,32 @@ header{
 }
 .link_modul.row_modul .link_modul.row_modul .row_container_menu{
 	padding-left: 10px;
+}
+
+
+:root {
+  --max-height-active: 300px;
+}
+/*Efek js*/
+.link_modul.active .col_container_menu{
+	max-height: var(--main-height_active);
+}
+.link_menu:hover,
+.link_menu.active{
+	text-decoration: none;
+	background: darkcyan;
+}
+.link_menu:hover *,
+.link_menu.active *{
+	color: #fff;
+}
+
+/*Sub Modul*/
+.link_modul.active .link_modul .col_container_menu{
+	max-height: 0px !important;
+}
+.link_modul.active .link_modul.active .col_container_menu{
+	max-height: var(--main-height_active) !important;
 }
 
 

@@ -130,6 +130,8 @@ function load_page( url_route = "path/path2/" ) {
 
 	// Membuka parent .link_modul jika link menu yang aktif terbuka berdasarkan yang di load punya parent link_modul
 	var link_menu_activePage = $('.sidebar .link_menu').filter(`[data-page="${url_route}"]`); 
+
+
 	var link_modul_activePage= link_menu_activePage.parents('.link_modul');
 	if ( link_modul_activePage.length > 0 ) {
 		open_link_modul( link_modul_activePage );
@@ -210,29 +212,64 @@ function LOAD_PAGE_SPA( target_page = BASE_URL_PAGE, callback = false ) {
 
 }
 
-
-
+/*
+|--------------------------------------------------------------------------
+| Load Link Modul
+|--------------------------------------------------------------------------
+|
+| Mengatur perilaku open / close modul sidebar.
+|
+| Rules:
+| - Membuka modul ketika header diklik
+| - Menutup modul lain yang tidak memenuhi kriteria
+| - Modul yang memiliki menu aktif tidak boleh ditutup
+| - Behaviour berbeda untuk modul utama dan sub modul
+|
+*/
 function load_link_modul( row_modul_header_target ) {
-	var link_modul_target = row_modul_header_target.parents( '.link_modul.row_modul' );
+
+
+	var link_modul_target = row_modul_header_target.closest( '.link_modul.row_modul' ); //Ini sama seperti cara kerja parents cuman hanya akan memilih parent sselector yang paling awal ditemui aja bukan seluruhnya
 	var row_container_menu = link_modul_target.find('.row_container_menu');
 	var link_menu_activeTarget = row_container_menu.find('.link_menu.active');
 	var link_modul_icon = link_menu_activeTarget.find('i');
-	
+
 	if ( link_modul_target.is('.active') == false ) {
 		//Jika link modul tidak aktif dan tidak terlihat, maka aktifkan dan tampilkan
 
-		//Munculkan link modul target dan Ubah Icon Indicator Menjadi Chevron Ke Bawah
+
 		open_link_modul( link_modul_target );
 
-		//Menghilangkan terlebih dahulu seluruh modul kecuali link modul target dan yang  punya child mennu yang sedang aktif
-		var link_modul_hasMenuActive =  $('.link_menu.active').parents('.link_modul');
-		var link_modul_NotMenuActiveAndTarget = $('.link_modul').not( link_modul_hasMenuActive ).not( link_modul_target );
-		close_link_modul( link_modul_NotMenuActiveAndTarget );
+		var kriteria_notClose = [];
+		var link_modul_close;
+
+		if ( link_modul_target.is('.sub_modul') == false ) {
+			console.log('Link Modul Bukan Sub Modul');
+
+			link_modul_close = $('.link_modul').not('.sub_modul');
+			kriteria_notClose = [
+			link_modul_target, //Link modul yang menjadi target
+			link_modul_close.find('.link_menu.active').closest('.link_modul'), //link modul bukan sub modul yang punya menu aktif 
+			link_modul_close.find('.link_menu.active').closest('.link_modul').find('.link_modul') //link modul bukan sub modul yang punya menu aktif 
+			];
+
+		}else{
+			console.log('Link Modul Adalah Sub Modul');
+			link_modul_close = link_modul_target.closest('.link_modul');
+			kriteria_notClose = [
+			link_modul_target,
+			link_modul_close.find('.link_menu.active').closest('.link_modul'),
+			];
+		}
+
+		for (var i = 0; i < kriteria_notClose.length; i++) {
+			link_modul_close = link_modul_close.not(kriteria_notClose[i]);
+		}
+		close_link_modul( link_modul_close );
 
 
-
-	}else{
-		//Jika link modul aktif, maka hilangkan link modul tersebut jika dia tidak punya menu active 
+	}else{	
+		//Jika link modul aktif dan tidak punya menu active, maka hilangkan link modul tersebut
 		if ( link_menu_activeTarget.length < 1 ) {
 
 			close_link_modul( link_modul_target );
@@ -248,6 +285,7 @@ function open_link_modul(link_modul_target){
 	var i_element = icon_indicator.find('i');
 	i_element.removeClass('fa-chevron-right');
 	i_element.addClass('fa-chevron-down');
+
 }
 function close_link_modul(link_modul_target){
 	link_modul_target.removeClass('active');

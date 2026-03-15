@@ -12,17 +12,14 @@ class Index extends Controller{
     //Method View Untuk Masuk Modul Aplikasi 
     //https://url_app/admin/ 
     public function index(){
-        $data_sidebar = Menu::SET_SIDEBAR_MENU();
+        // $data_sidebar = Menu::SET_SIDEBAR_MENU();
         $data_modal_menu = Menu::SET_MODAL_MENU();
 
-
-        // dd($data_sidebar);
+        // // dd($data_sidebar);
 
         $data = [];
+        // $data['data_sidebar'] = $data_sidebar;
         $data['data_modal_menu'] = $data_modal_menu;
-        $data['data_sidebar'] = $data_sidebar;
-
-
         return view('Index/index', $data);
     }
 }
