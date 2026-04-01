@@ -7,9 +7,9 @@ use App\Http\Controllers\Modul; //---> Folder Layer Controller Aplikasi SPA Admi
 
 
 
-//=== route entry controller SPA Modul Aplikasi  =======
+//=== route entry controller SPA Modul Aplikasi ( Except handling view index )  =======
 $SPA_ROUTE_PREFIX_KEYWORD = env('SPA_ROUTE_PREFIX_KEYWORD');
-$ROUTE_EXCEPT = [ $SPA_ROUTE_PREFIX_KEYWORD, "api"];
+$ROUTE_EXCEPT = [ $SPA_ROUTE_PREFIX_KEYWORD, "api"]; //Route bisa dikunjungi tanpa diarahkan ke index spa 
 $ROUTE_EXCEPT = implode("|", $ROUTE_EXCEPT);
 Route::get('/{any}', function () {
     return app(Index::class)->index();
@@ -32,7 +32,7 @@ Route::prefix( $SPA_ROUTE_PREFIX_KEYWORD )->group(function(){
     //Source View : resource\view\Modul_dashboard
     Route::controller(Modul\Modul_dashboard::class)->group(function () {
     //==== Route Fitur ====
-        Route::get('/dashboard/', 'dashboard');
+        Route::get('/dashboard', 'dashboard');
     });
 
     //==== Route Modul Account
@@ -69,7 +69,7 @@ Route::prefix( $SPA_ROUTE_PREFIX_KEYWORD )->group(function(){
 
 
 
-//==== Route Modul Teknisi  
+    //==== Route Modul Teknisi  
     //Source Controller Modul : App\Http\Controllers\Modul\Modul_teknisi
     //Source View : resource\views\Modul_teknisi
     Route::controller(Modul\Modul_teknisi::class)->group(function () {

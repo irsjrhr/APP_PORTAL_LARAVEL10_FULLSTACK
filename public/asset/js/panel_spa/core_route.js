@@ -1,7 +1,8 @@
 //++++++++++++++++++++++++ BASE ROUTING SCRIPT ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*INGAT!! INI HARUS TERHUBUNG DENGAN BEBERAPA SUMBER SEBAGAI NILAI KONFIGNYA, SEPERTI :
-- File Script config.js ( PENTING )
-- File Script core.js dan api.js
+- File Script config.js ( PENTING ) untuk nilai konstanta konfigurasi
+- File Script core.js dan api.js untuk fungsi dan nilai core aplikasi
+- File blade resource/Index/index.blade.php dan env untuk mengambil nilai env dan mengirimkan ke JS melalui variabel window.env 
 */
 
 

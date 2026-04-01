@@ -1,6 +1,5 @@
 
 {{-- GET AND SET ENV VALUE TO WINDOW VARIABEL  --}}
-{{-- INGAT!!!! KALO ADA P --}}
 @php
 $BASE_URL_PAGE = asset('');
 $URL_SERVICE_BE = env('URL_SERVICE_BE');
