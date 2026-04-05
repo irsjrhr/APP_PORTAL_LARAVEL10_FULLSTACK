@@ -425,7 +425,7 @@
 									</div>
 									
 									{{-- Row Menu - Link Menu --}}
-									<div class="row row_menu link_menu" data-page="/teknisi/project/">
+									<div class="row row_menu link_menu" data-page="/teknisi/monitoring/">
 										<div class="col-1 menu_logo">
 											<i class="fas fa-map-marked-alt"></i>
 										</div>
