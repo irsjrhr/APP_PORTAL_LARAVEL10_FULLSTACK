@@ -9,14 +9,14 @@ use App\Http\Controllers\Modul; //---> Folder Layer Controller Aplikasi SPA Admi
 
 //=== route entry controller SPA Modul Aplikasi ( Except handling view index )  =======
 $SPA_ROUTE_PREFIX_KEYWORD = env('SPA_ROUTE_PREFIX_KEYWORD');
-$ROUTE_EXCEPT = [ $SPA_ROUTE_PREFIX_KEYWORD, "api"]; //Route bisa dikunjungi tanpa diarahkan ke index spa 
-$ROUTE_EXCEPT = implode("|", $ROUTE_EXCEPT);
+$ROUTE_NOT_INDEX = [ $SPA_ROUTE_PREFIX_KEYWORD, "api", 'auth']; //Route bisa dikunjungi tanpa diarahkan ke route index spa 
+$ROUTE_NOT_INDEX = implode("|", $ROUTE_NOT_INDEX);
 Route::get('/{any}', function () {
     return app(Index::class)->index();
-})->where('any', '^(?!'.$ROUTE_EXCEPT.').*$');
+})->where('any', '^(?!'.$ROUTE_NOT_INDEX.').*$');
 /*
 artinya:
-user akan selalu diarahkan ke view index() pada class controller Index untuk route apa saja kecuali yang ada didalam $ROUTE_EXCEPT
+user akan selalu diarahkan ke view index() pada class controller Index untuk route apa saja kecuali yang ada didalam $ROUTE_NOT_INDEX
 ❌ jangan tangkap /SPA_VIEW/*
 ❌ jangan tangkap /api/*
 ✅ tangkap sisanya (/dashboard, /account, dll)

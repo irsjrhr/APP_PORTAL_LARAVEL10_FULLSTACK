@@ -58,7 +58,6 @@ const ROUTE = {
 
 		//++++++++ Build Object Route With Callback Triger +++++++
 		var route_obj = new ROUTE_INIT( route, load_spa );
-
 		// Buat perilaku page ketika di triger dari method callback yang di daftarkan berdasarkan routenya
 		route_obj.callback_route = function() {
 			callback( route_obj );
