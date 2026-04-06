@@ -1,7 +1,7 @@
 :root {
   --max-height-active: 300px;
-  --bg-menuSidebar-active: darkcyan;
-  --color-menuSidebar-active: #fff;
+  --bg-modulSidebar-active: darkcyan;
+  --color-modulSidebar-active: #fff;
 }
 
 *{
@@ -99,16 +99,6 @@ header{
 .col_container_menu > div:first-child{
 	margin-top: 10px;
 }
-.link_modul.row_modul.active > .row_modul_header,
-.link_modul.row_modul > .row_modul_header:hover{
-	background: var( --bg-menuSidebar-active );
-	border-radius: 20px;
-} 
-
-.link_modul.row_modul.active > .row_modul_header *,
-.link_modul.row_modul > .row_modul_header:hover *{
-	color: var( --color-menuSidebar-active );
-} 
 
 
 
@@ -160,14 +150,34 @@ header{
 .link_modul.active .col_container_menu{
 	max-height: var(--main-height_active);
 }
+.link_modul.row_modul.active > .row_modul_header,
+.link_modul.row_modul > .row_modul_header:hover{
+	border-radius: 20px;
+} 
+.link_modul.row_modul.active > .row_modul_header{
+	background: darkcyan;
+} 
+.link_modul.row_modul:hover > .row_modul_header{
+	background: rgba(0, 139, 139, .5);
+}
+.link_modul.row_modul.active > .row_modul_header *,
+.link_modul.row_modul > .row_modul_header:hover *{
+	color: #fff;
+} 
+
 .link_menu:hover,
 .link_menu.active{
 	text-decoration: none;
-	background:  var(--bg-menuSidebar-active) !important;
+}
+.link_menu:hover{
+	background: rgba(0, 139, 139, .5) !important;
+}
+.link_menu.active{
+	background:  darkcyan !important;
 }
 .link_menu:hover *,
 .link_menu.active *{
-	color:  var(--color-menuSidebar-active) !important;
+	color:  #fff !important;
 }
 
 /*Sub Modul*/
