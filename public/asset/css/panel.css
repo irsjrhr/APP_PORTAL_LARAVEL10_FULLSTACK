@@ -1,7 +1,5 @@
 :root {
   --max-height-active: 300px;
-  --bg-modulSidebar-active: darkcyan;
-  --color-modulSidebar-active: #fff;
 }
 
 *{
@@ -155,10 +153,10 @@ header{
 	border-radius: 20px;
 } 
 .link_modul.row_modul.active > .row_modul_header{
-	background: darkcyan;
+	background: rgba(0, 139, 139, .7);
 } 
 .link_modul.row_modul:hover > .row_modul_header{
-	background: rgba(0, 139, 139, .5);
+	background: rgba(0, 139, 139, .7);
 }
 .link_modul.row_modul.active > .row_modul_header *,
 .link_modul.row_modul > .row_modul_header:hover *{
@@ -170,7 +168,7 @@ header{
 	text-decoration: none;
 }
 .link_menu:hover{
-	background: rgba(0, 139, 139, .5) !important;
+	background: rgba(0, 139, 139, .7) !important;
 }
 .link_menu.active{
 	background:  darkcyan !important;
