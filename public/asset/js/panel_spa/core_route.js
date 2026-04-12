@@ -40,7 +40,7 @@ function CLEANUP_SPA_EVENT_NAMESPACE( route ) {
 
 // const BASE_URL_PAGE = "http://127.0.0.1:8000/"; ---> INI ADA DI api.js
 function ROUTE_INIT( route, load_spa = false ) {
-	this.route = route; //Ini route asli dari UI Menu 
+	this.route = route; //Ini route asli dari UI Menu Tapi Bukan Bentuk Route Page SPA, hanya menjadi id pengenal dari suatu route 
 	this.route_spa = BASE_URL_PAGE + SPA_ROUTE_PREFIX_KEYWORD + route; //Route SPA untuk melakuka load spa 
 	this.callback_route = false; //Fungsi callback
 	//Membuat route spa 
@@ -69,6 +69,10 @@ const ROUTE = {
 
 	//MEMANGGIL ROUTE BERDASARKAN TRIGER ROUTE AARGUMENNYA 
 	load : function( url_route_target = BASE_URL_PAGE + "path/path2/" ) {
+
+		console.group("++++++ LOG LOAD METHOD +++++++++");
+
+		// Mencari object roue berdasarkan argumen route yang dilempr dengan route di que que object route 
 		var ROUTE_INIT_EXIST = false;
 		var QUE_ROUTE = this.QUE_ROUTE;
 		for (var i = 0; i < QUE_ROUTE.length; i++) {
@@ -80,10 +84,12 @@ const ROUTE = {
 			}
 		}
 
+		//Pengkondisian apakah route target sudah tedaftar atau tidak.
 		if ( ROUTE_INIT_EXIST != false ) {
 			//Jika Route Yang Di Triger Ada, Maka Jalankan Perilaku dari callbacknya
 			console.warn('ROUTE TARGET DITEMUKAN DENGAN MENJALANKAN CALLBACK URL ROUTE ' + url_route_target);
 
+			console.warn( ROUTE_INIT_EXIST );
 			//Handling Type Callback
 			if (typeof ROUTE_INIT_EXIST.callback_route === 'function') {
 				///Panggil method perilaku Routenya
@@ -92,12 +98,14 @@ const ROUTE = {
 				console.error('ROUTE URL ROUTE ' + url_route_target +  "TIDAK MEMILIKI CALLBACK FUNCTION");
 			}
 
-
 		}else{
 			var msg_error = 'TIDAK DITEMUKAN ATAU BELUM DIDAFTARKAN ROUTENYA DI core_route.js DENGAN URL ROUTE ' + url_route_target;
 			Swal.fire(msg_error);
 			console.error( msg_error );
 		}
+
+		console.groupEnd("++++++ END  OF LOG LOAD METHOD +++++++++");
+
 	}
 };
 //++++++++++++++++++++++++ END OF BASE ROUTING SCRIPT ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -138,15 +146,14 @@ function LOAD_PAGE_SPA( target_page = BASE_URL_PAGE, callback = false ) {
 	console.log( "Target page", target_page );
 	main_container.load( target_page, function(responseText, statusText, xhr) {
 
+		//Jika page tidak dapat di load atau error 	
 		if ( statusText === "error") {
 			console.log( xhr );
-			//Jika page tidak dapat di load atau error 	
 			var msg = `${ xhr.status } <br> ${xhr.statusText}`
 			animasi_loadPage('show', animasi_loadPageEl, msg);
 			return false; //Menghentikan laju fungsi
 		}
-
-
+		
 		//Membersihkan event SPA Khusus Fitur yang memiliki namespace .eventSPA
 		CLEANUP_SPA_EVENT_NAMESPACE();
 
@@ -198,6 +205,7 @@ function load_page( url_route = "path/path2/" ) {
 	var row_modul_header_target = link_modul_activePage.children('.row_modul_header'); //row_modul_header pertama milik si modul saja
 	load_link_modul( row_modul_header_target );
 }
+
 
 /*
 |--------------------------------------------------------------------------
