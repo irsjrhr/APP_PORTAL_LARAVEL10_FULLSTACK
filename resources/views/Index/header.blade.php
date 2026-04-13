@@ -1,22 +1,22 @@
 
 <!doctype html>
-<html lang="en">
-<head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" type="text/css" href="{{asset('')}}asset/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="{{asset('')}}asset/css/style.css">
-	<link rel="stylesheet" type="text/css" href="{{asset('')}}asset/css/chart_main.css">
-	<link rel="stylesheet" type="text/css" href="{{asset('')}}asset/css/panel.css">
-	<link rel="stylesheet" type="text/css" href="{{asset('')}}asset/css/panel_admin.css">
-	<title> Admin Panel </title>
-</head>
-<body>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" type="text/css" href="{{asset('')}}asset/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{asset('')}}asset/css/style.css">
+		<link rel="stylesheet" type="text/css" href="{{asset('')}}asset/css/chart_main.css">
+		<link rel="stylesheet" type="text/css" href="{{asset('')}}asset/css/panel.css">
+		<link rel="stylesheet" type="text/css" href="{{asset('')}}asset/css/panel_admin.css">
+		<title> Admin Panel </title>
+	</head>
+	<body>
 
-	<style type="text/css">	
+		<style type="text/css">	
 		.content .nav_header .col_left{
 			display: flex;
 			flex-direction: column;
@@ -326,6 +326,52 @@
 							
 						</div>
 						{{-- End Of Row Modul - Modul FSM --}}
+
+						{{--  Row Modul - Modul Log --}}
+						<div class="row_modul link_modul">
+							
+							<div class="row row_modul_header mb-2">
+								<div class="col-1 menu_logo">
+									<i class="fas fa-folder-open icon_modul"></i>
+								</div>
+								<div class="col menu_text">
+									Modul Log
+									<span class="icon_indicator">
+										<i class="fas fa-chevron-right"></i>
+									</span>
+								</div>
+							</div>
+							
+
+							{{-- Row Container Menu - Loop Menu --}}
+							<div class="row row_container_menu">
+								{{-- Col Container Menu --}}
+								<div class="col-12 col_container_menu">
+									
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="/log/">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-tachometer-alt"></i>
+										</div>
+										<div class="col menu_text">
+											Dashboard
+										</div>
+									</div>
+
+									{{-- Row Menu - Link Menu --}}
+									<div class="row row_menu link_menu" data-page="/log/log_frontend">
+										<div class="col-1 menu_logo">
+											<i class="fas fa-tachometer-alt"></i>
+										</div>
+										<div class="col menu_text">
+											Log Front End
+										</div>
+									</div>
+
+								</div>			
+							</div>
+						</div>
+						{{-- End Of Row Modul - Modul Log --}}
 						
 
 						{{-- Row Modul - Modul Transaksi --}}

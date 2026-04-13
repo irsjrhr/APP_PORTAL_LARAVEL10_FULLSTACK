@@ -29,6 +29,8 @@
 {{-- <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/search_filter.js"></script> --}}
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/main.js"></script>
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/table.js"></script>
+<script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/log.js"></script>
+
 
 
 {{-- +++++++++++ END OF SPA CORE +++++++++++ --}}

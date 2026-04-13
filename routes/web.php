@@ -44,6 +44,15 @@ Route::prefix( $SPA_ROUTE_PREFIX_KEYWORD )->group(function(){
         Route::get('/profile', 'index');
     });
 
+    //==== Route Modul Log
+    //Source Controller Modul : App\Http\Controllers\Modul_log
+    //Source View : resource\view\Modul_log
+    Route::controller(Modul\Modul_log::class)->group(function () {
+    //==== Route Fitur ====
+        Route::get('/log', 'index');
+        Route::get('/log/log_frontend', 'log_frontend');
+    });
+
     //==== Route Modul Account
     //Source Controller Modul : App\Http\Controllers\Modul_account
     //Source View : resource\view\Modul_account

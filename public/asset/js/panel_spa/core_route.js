@@ -11,7 +11,7 @@ $(document).ready(function(e) {
 	//Membuka halaman pertama dari menu yang paling awal yaitu dashboard 
 	var link_menu_first = $('.sidebar').find('.link_menu').first();
 	var data_page = link_menu_first.attr('data-page');
-	load_page( "/dashboard/" );
+	load_page( "/log/log_frontend" );
 
 	$('.sidebar .link_modul .row_modul_header').on('click', function() {
 		load_link_modul( $(this) );
@@ -350,6 +350,105 @@ ROUTE.add( '/dashboard/', function( RouteObj ) {
 //https://url_app_fe/profile
 ROUTE.add( '/profile/', function( RouteObj ) {
 	LOAD_PAGE_SPA( RouteObj.route_spa );
+});
+
+//==================== MODUL LOG ===================
+//https://url_app_fe/profile
+ROUTE.add( '/log/', function( RouteObj ) {
+	LOAD_PAGE_SPA( RouteObj.route_spa );
+});
+ROUTE.add( '/log/log_frontend', function( RouteObj ) {
+
+	LOAD_PAGE_SPA( RouteObj.route_spa, function() {
+
+		// Generate Value Format Time UI
+		generateTimeOptions("select[name='startTime']");
+		generateTimeOptions("select[name='endTime']");
+
+		$('#form_filterLog').on('submit'+SPA_EVENT_NAMESPACE, function(e) {
+
+			e.preventDefault();
+
+			var FILTER = [];
+			// Filter Time Range
+			var startTime = $('[name=startTime]');
+			var endTime = $('[name=endTime]');
+			FILTER.push({
+				type: 'time',
+				start : startTime.val(),
+				end : endTime.val()
+			});
+
+			// Filter Type
+			var typeLog = $('[name=typeLog]');
+			FILTER.push({
+				type: 'typeLog',
+				value : typeLog.val()
+			});
+
+			console.log(FILTER);
+			var data = getDataLog( FILTER );
+			render_tableLog(data);
+		});
+	} );
+
+	function formatToDBTime(dateString) {
+		var date = new Date(dateString);
+
+		var yyyy = date.getFullYear();
+		var mm = String(date.getMonth() + 1).padStart(2, "0");
+		var dd = String(date.getDate()).padStart(2, "0");
+
+		var hh = String(date.getHours()).padStart(2, "0");
+		var min = String(date.getMinutes()).padStart(2, "0");
+		var ss = String(date.getSeconds()).padStart(2, "0");
+
+		return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+	}
+	function generateTimeOptions(selector) {
+
+		for (var h = 0; h < 24; h++) {
+
+			// 00 menit
+			var hour = String(h).padStart(2, "0");
+			var min1 = "00";
+			var min2 = "30";
+
+			$(selector).append(
+				`<option value="${hour}:${min1}">${hour}:${min1}</option>`
+				);
+
+			$(selector).append(
+				`<option value="${hour}:${min2}">${hour}:${min2}</option>`
+				);
+		}
+	}
+	function render_tableLog( data = [] ) {
+
+		var table_logData = $('#table_logData');
+		var tbody = table_logData.find('tbody');
+
+		tbody.html("");
+		for (var i = 0; i < data.length; i++) {
+			var row_data = data[i];
+			var tr = `
+			<tr>
+			<td>${i}</td>
+			<td>${ formatToDBTime(row_data.time) }</td>
+			<td>${row_data.type}</td>
+			<td>${row_data.message}</td>
+			<td>${row_data.context}</td>
+			<td>${row_data.file}</td>
+			<td>${row_data.line}</td>
+			<td>${row_data.url}</td>
+			</tr>
+			`;
+			tbody.append( tr )	
+		}
+
+	}
+
+
 });
 
 //==================== MODUL ACCOUNT ===================
