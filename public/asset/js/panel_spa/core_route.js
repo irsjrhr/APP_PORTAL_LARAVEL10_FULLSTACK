@@ -462,7 +462,7 @@ ROUTE.add( '/log/log_frontend', function( RouteObj ) {
 			var row_data = data_log_filter[i];
 			var tr = `
 			<tr>
-			<td>${i}</td>
+			<td>${i + 1}</td>
 			<td>${ formatToDBTime(row_data.time) }</td>
 			<td>${row_data.type}</td>
 			<td>${row_data.message}</td>
