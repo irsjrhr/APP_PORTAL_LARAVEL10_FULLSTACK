@@ -33,7 +33,7 @@ $(document).ready(function(e) {
 function CLEANUP_SPA_EVENT_NAMESPACE( route ) {
 	console.warn(`EVENT NAME SPACE ${SPA_EVENT_NAMESPACE} URL ROUTE!
 		${ route } DIHAPUS!!!
-		`);
+`);
 	$(document).off(SPA_EVENT_NAMESPACE);
 	$('body ').off(SPA_EVENT_NAMESPACE);
 }
@@ -117,9 +117,9 @@ function LOAD_PAGE_SPA( target_page = BASE_URL_PAGE, callback = false ) {
 	//SET DEBUG URL ACTIVE
 	LOAD_PAGE_URL = target_page; 
 	console.groupCollapsed(
-		`%c+[++++ LOAD_PAGE_SPA with route ${ LOAD_PAGE_URL  } +++++]`,
-		'color:white; background:#007bff; padding:2px 6px; border-radius:4px;'
-		);
+`%c+[++++ LOAD_PAGE_SPA with route ${ LOAD_PAGE_URL  } +++++]`,
+'color:white; background:#007bff; padding:2px 6px; border-radius:4px;'
+);
 	trace();
 
 	//Handling Error Callback Type
@@ -365,32 +365,58 @@ ROUTE.add( '/log/log_frontend', function( RouteObj ) {
 		generateTimeOptions("select[name='startTime']");
 		generateTimeOptions("select[name='endTime']");
 
+
+		//Form Filtering Submit
 		$('#form_filterLog').on('submit'+SPA_EVENT_NAMESPACE, function(e) {
-
 			e.preventDefault();
-
-			var FILTER = [];
-			// Filter Time Range
-			var startTime = $('[name=startTime]');
-			var endTime = $('[name=endTime]');
-			FILTER.push({
-				type: 'time',
-				start : startTime.val(),
-				end : endTime.val()
-			});
-
-			// Filter Type
-			var typeLog = $('[name=typeLog]');
-			FILTER.push({
-				type: 'typeLog',
-				value : typeLog.val()
-			});
-
-			console.log(FILTER);
-			var data = getDataLog( FILTER );
-			render_tableLog(data);
+			load_data_table();
 		});
-	} );
+		$('#btn_delete_allData').on('click'+SPA_EVENT_NAMESPACE, function  () {
+			deleteAllDataLog();
+			load_data_table();
+		});
+		$('#btn_generate_dummy').on('click'+SPA_EVENT_NAMESPACE, function () {
+			generateDummyLogs();
+			load_data_table();
+		});
+
+
+	});
+
+	function load_data_table(){
+
+		//+++++ Render Table 
+		var FILTER = build_filterData();
+		var data_log_filter = get_dataLogFilter( FILTER );
+		console.log( data_log_filter );
+		render_tableLog(data_log_filter);
+
+		// ++++ Render Type Log
+		var data_typeLog = get_dataTypeLog()
+		render_typeLog( data_typeLog );
+
+	}
+
+	function build_filterData() {
+		var FILTER = [];
+		// Filter Time Range
+		var startTime = $('[name=startTime]');
+		var endTime = $('[name=endTime]');
+		FILTER.push({
+			type: 'time',
+			start : startTime.val(),
+			end : endTime.val()
+		});
+
+		// Filter Type
+		var typeLog = $('[name=typeLog]');
+		FILTER.push({
+			type: 'typeLog',
+			value : typeLog.val()
+		});
+
+		return FILTER;
+	}
 
 	function formatToDBTime(dateString) {
 		var date = new Date(dateString);
@@ -415,22 +441,25 @@ ROUTE.add( '/log/log_frontend', function( RouteObj ) {
 			var min2 = "30";
 
 			$(selector).append(
-				`<option value="${hour}:${min1}">${hour}:${min1}</option>`
-				);
+		`<option value="${hour}:${min1}">${hour}:${min1}</option>`
+		);
 
 			$(selector).append(
-				`<option value="${hour}:${min2}">${hour}:${min2}</option>`
-				);
+		`<option value="${hour}:${min2}">${hour}:${min2}</option>`
+		);
 		}
 	}
-	function render_tableLog( data = [] ) {
+	function render_tableLog( data_log_filter = [] ) {
 
 		var table_logData = $('#table_logData');
 		var tbody = table_logData.find('tbody');
 
+
 		tbody.html("");
-		for (var i = 0; i < data.length; i++) {
-			var row_data = data[i];
+
+		//Menambahkan kolom table berdasarkan row data dan membentuk LOG_TYPE_LIST
+		for (var i = 0; i < data_log_filter.length; i++) {
+			var row_data = data_log_filter[i];
 			var tr = `
 			<tr>
 			<td>${i}</td>
@@ -447,6 +476,24 @@ ROUTE.add( '/log/log_frontend', function( RouteObj ) {
 		}
 
 	}
+
+	function render_typeLog ( LOG_TYPE_LIST = [] ) {
+		//++++ Render Log Type List
+
+		var select_typeLog = $('[name=typeLog]');
+		select_typeLog.html(" ");
+		// Isi option awal untuk nilai ALL
+		var option_all = `
+		<option value=""> All </option>
+		`;
+		select_typeLog.append( option_all );
+		for (var i = 0; i < LOG_TYPE_LIST.length; i++) {
+			var typeLog = LOG_TYPE_LIST[i];
+			var option = `<option value="${typeLog}"> ${typeLog} </option>`;
+			select_typeLog.append( option );
+		}
+	}
+
 
 
 });
@@ -929,19 +976,19 @@ ROUTE.add( '/user/tambah_project/', function( RouteObj ) {
 				<p> ${ jarak_km } km dari jarak kamu </p>
 				<button type="button" class="btn btn-success btn_pilih_teknisi"> Pilih </button>
 				</div>
-				</div>`;
+			</div>`;
 
 				//Tambahkan cardnya 
-				el_row_teknisi.append( el_card_teknisi );
-			}
-
-
-
+			el_row_teknisi.append( el_card_teknisi );
 		}
 
 
 
-	});
+	}
+
+
+
+});
 
 });
 //https://url_app_fe/user/monitoring

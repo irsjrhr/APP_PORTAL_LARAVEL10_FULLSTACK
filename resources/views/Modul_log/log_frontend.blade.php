@@ -1,21 +1,21 @@
 <style type="text/css">
-.container_option{
-	width: 100%;
-	background: #fff;
-	height: auto;
-	padding: 20px;
-	padding-top: 0;
-	padding-bottom: 0;
-}
-.filter_section{
-	width: 100%;
-	display: flex;
-	gap: 20px;
-}
-.filter_section > div{
-	flex: 1;
-	gap: 20px;
-}
+	.container_option{
+		width: 100%;
+		background: #fff;
+		height: auto;
+		padding: 20px;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	.filter_section{
+		width: 100%;
+		display: flex;
+		gap: 20px;
+	}
+	.filter_section > div{
+		flex: 1;
+		gap: 20px;
+	}
 </style>
 
 <section class="section_content">
@@ -61,12 +61,24 @@
 									<label> Type Log </label>
 									<select class="form-control" name="typeLog">
 										<option value=""> All </option>
-										<option value="GLOBAL"> GLOBAL </option>
 									</select>
 								</div>
 								<div class="form-group">
-									<button class="btn btn-warning">
+									<button class="btn btn-primary">
 										<i class="fas fa-filter"></i>
+										Apply Data Log
+									</button>
+								</div>
+								<div class="form-group">
+									<button class="btn btn-danger" id="btn_delete_allData">
+										<i class="fas fa-trash"></i>
+										Hapus Semua Data Log
+									</button>
+								</div>
+								<div class="form-group">
+									<button class="btn btn-warning" id="btn_generate_dummy">
+										<i class="fas fa-pen"></i>
+										Generate Data Log Dummy
 									</button>
 								</div>
 

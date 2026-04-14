@@ -9,7 +9,7 @@ use App\Http\Controllers\Modul; //---> Folder Layer Controller Aplikasi SPA Admi
 
 //=== route entry controller SPA Modul Aplikasi ( Except handling view index )  =======
 $SPA_ROUTE_PREFIX_KEYWORD = env('SPA_ROUTE_PREFIX_KEYWORD');
-$ROUTE_NOT_INDEX = [ $SPA_ROUTE_PREFIX_KEYWORD, "api", 'auth']; //Route bisa dikunjungi tanpa diarahkan ke route index spa 
+$ROUTE_NOT_INDEX = [ $SPA_ROUTE_PREFIX_KEYWORD, "api", 'auth']; //Route yang bisa dikunjungi tanpa diarahkan ke route index spa 
 $ROUTE_NOT_INDEX = implode("|", $ROUTE_NOT_INDEX);
 Route::get('/{any}', function () {
     return app(Index::class)->index();
