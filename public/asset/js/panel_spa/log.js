@@ -4,23 +4,36 @@ const KEY_STORAGE_LOG = "LOG_APPS";
 
 
 /*
-  => Bentuk local storage LOG TYPE LIST
-  ["ERROR_LOG", "CIT LOG", ....]
 
-  => Bentuk local storage OPTION FILTER
-  [
+  Bentuk localStorage.[KEY_STORAGE_LOG] = [
+  {
+    message: ""
+    type: "ERROR_CIT",
+    context: context,
+    file: error?.fileName || null,
+    line: error?.lineNumber || null,
+    column: error?.columnNumber || null,
+    stack: error?.stack || null,
+    time: new Date(),
+    url: window.location.href,
+    userAgent: navigator.userAgent
+  },
+  {
+    message: ""
+    type: "ERROR_CIT",
+    context: context,
+    file: error?.fileName || null,
+    line: error?.lineNumber || null,
+    column: error?.columnNumber || null,
+    stack: error?.stack || null,
+    time: new Date(),
+    url: window.location.href,
+    userAgent: navigator.userAgent
+  },
 
-    {
-      type : "time",
-      start : "00:00",
-      end : "00:00"
-    },
-    {
-      type : "logType",
-      value : "ERROR CIT",
-    }
+  ]
 
-  ];
+
 
 
 */
@@ -182,7 +195,6 @@ function get_filterState_byTypeFilter( typeFilter ){
   end : ""
   }
   */
-
   return {
     index_filterStateDB : index_filterStateDB,
     row_filterStateDB : row_filterStateDB
