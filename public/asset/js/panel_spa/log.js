@@ -1,45 +1,41 @@
 
-const KEY_STORAGE_LOG = "LOG_APPS";
-
-
 
 /*
 
-  Bentuk localStorage.[KEY_STORAGE_LOG] = [
-  {
-    message: ""
-    type: "ERROR_CIT",
-    context: context,
-    file: error?.fileName || null,
-    line: error?.lineNumber || null,
-    column: error?.columnNumber || null,
-    stack: error?.stack || null,
-    time: new Date(),
-    url: window.location.href,
-    userAgent: navigator.userAgent
-  },
-  {
-    message: ""
-    type: "ERROR_CIT",
-    context: context,
-    file: error?.fileName || null,
-    line: error?.lineNumber || null,
-    column: error?.columnNumber || null,
-    stack: error?.stack || null,
-    time: new Date(),
-    url: window.location.href,
-    userAgent: navigator.userAgent
-  },
+Bentuk localStorage.[KEY_STORAGE_LOG] = [
+{
+  message: ""
+  type: "ERROR_CIT",
+  context: context,
+  file: error?.fileName || null,
+  line: error?.lineNumber || null,
+  column: error?.columnNumber || null,
+  stack: error?.stack || null,
+  time: new Date(),
+  url: window.location.href,
+  userAgent: navigator.userAgent
+},
+{
+  message: ""
+  type: "ERROR_CIT",
+  context: context,
+  file: error?.fileName || null,
+  line: error?.lineNumber || null,
+  column: error?.columnNumber || null,
+  stack: error?.stack || null,
+  time: new Date(),
+  url: window.location.href,
+  userAgent: navigator.userAgent
+},
 
-  ]
+]
 
 
 
 
 */
 
-
-
+const KEY_STORAGE_LOG = "LOG_APPS";
 function logError(error, context = "", type = "GLOBAL") {
   var log = {
     message: error?.message || error,
@@ -54,7 +50,7 @@ function logError(error, context = "", type = "GLOBAL") {
     userAgent: navigator.userAgent
   };
 
-  console.error("LOG INTERN:", log);
+  console.warn("LOG INTERN:", log);
   saveDataLog(log);
 }
 function saveDataLog(log) {
@@ -72,208 +68,184 @@ function deleteAllDataLog(){
 
 var FILTER_STATE = [
 
-  {
-    typeFilter : "time",
-    start : "00:00",
-    end : "00:00",
-    filter : function( data ) {
+{
+  typeFilter : "time",
+  start : "00:00",
+  end : "00:00",
+  filter : function( data ) {
 
-      var result, msg_debug;
+    var result, msg_debug;
 
-      var startTime = this.start;
-      var endTime = this.end;
+    var startTime = this.start;
+    var endTime = this.end;
 
-      if ( 
+    if ( 
 
-        ( startTime == "00:00" && endTime == "00:00"  ) 
-        ||
-        ( startTime.length < 1 && endTime.length < 1  ) 
-        ) 
-      {
-        //Kondisi data result tidak di filter atau all
-        msg_debug = "Data Tidak Terfilter Time";
-        result = data;
-      }else{
-        //Kondisi data result sudah di filter
-        msg_debug = "Data Terfilter Time";
-        result = data.filter(log => {
-          var logDate = new Date(log.time);
+      ( startTime == "00:00" && endTime == "00:00"  ) 
+      ||
+      ( startTime.length < 1 && endTime.length < 1  ) 
+      ) 
+    {
+      //Kondisi data result tidak di filter atau all
+      msg_debug = "Data Tidak Terfilter Time";
+      result = data;
+    }else{
+      //Kondisi data result sudah di filter
+      msg_debug = "Data Terfilter Time";
+      result = data.filter(log => {
+        var logDate = new Date(log.time);
 
-          var current = logDate.getHours() * 60 + logDate.getMinutes();
+        var current = logDate.getHours() * 60 + logDate.getMinutes();
 
-          var [startH, startM] = startTime.split(":").map(Number);
-          var [endH, endM] = endTime.split(":").map(Number);
+        var [startH, startM] = startTime.split(":").map(Number);
+        var [endH, endM] = endTime.split(":").map(Number);
 
-          var start = startH * 60 + startM;
-          var end = endH * 60 + endM;
+        var start = startH * 60 + startM;
+        var end = endH * 60 + endM;
 
-          return current >= start && current <= end;
-        })
-      }
+        return current >= start && current <= end;
+      })
+    }
 
 
-      console.log( `
+    console.log( `
       ++++ FILTER TIME +++++ \n
       Start : ${ startTime }, \n
       End : ${ endTime } \n
       Result : 
       `, result);
-      return result;
-
-    }
-
+    return result;
   }, 
-  {
-    typeFilter : "logType",
-    value : "",
-    filter : function (data) {
-
-      var result;
-      var logType = this.value;
-
-
-      if ( logType && logType.length > 0) {
-        result = data.filter(log => log.type === logType);
-      }else{
-        result = data; // kalau kosong, jangan filter
-      }
-
-      console.log( `
-        ++++ FILTER TYPE LOG +++++ \n
-        Type Log : ${ logType }, \n
-        Result : 
-      `, result);
-      return result;
-
-    }
-  },
-  {
-    typeFilter : "logFile",
-    value : "",
-    filter: function( data ){
-
-      var result;
-      var logFile = this.value;
-
-      if (logFile && logFile.length > 0) {
-        result = data.filter(log => log.file === logFile);
-      } else {
-        result = data; // kalau kosong, jangan filter
-      }
-
-      console.log(`
-        ++++ FILTER FILE LOG +++++ \n
-        File Log : ${logFile}, \n
-        Result : 
-      `, result);
-
-      return result;
-
-    }
+  updateFilter : function( row_filterStateUpdate = {} ) {
+    this.start = row_filterStateUpdate.start;
+    this.end = row_filterStateUpdate.end;
   }
+
+}, 
+{
+  typeFilter : "logType",
+  value : "",
+  filter : function (data) {
+
+    var result;
+    var logType = this.value;
+
+
+    if ( logType && logType.length > 0) {
+      result = data.filter(log => log.type === logType);
+    }else{
+      result = data; // kalau kosong, jangan filter
+    }
+
+    console.log( `
+      ++++ FILTER TYPE LOG +++++ \n
+      Type Log : ${ logType }, \n
+      Result : 
+      `, result);
+    return result;
+  },
+  updateFilter : function( row_filterStateUpdate = {} ) {
+    this.value = row_filterStateUpdate.value;
+  }
+
+},
+{
+  typeFilter : "logFile",
+  value : "",
+  filter: function( data ){
+
+    var result;
+    var logFile = this.value;
+
+    if (logFile && logFile.length > 0) {
+      result = data.filter(log => log.file === logFile);
+    } else {
+      result = data; // kalau kosong, jangan filter
+    }
+
+    console.log(`
+      ++++ FILTER FILE LOG +++++ \n
+      File Log : ${logFile}, \n
+      Result : 
+      `, result);
+
+    return result;
+
+  },
+  updateFilter : function( row_filterStateUpdate = {} ) {
+    this.value = row_filterStateUpdate.value;
+  }
+}
 
 ];
-
-
-
-function get_filterState_byTypeFilter( typeFilter ){
-  var 
-  index_filterStateDB = 0, 
-  row_filterStateDB = {};
-  for (var i = 0; i < FILTER_STATE.length; i++) {
-    row_filterStateDB = FILTER_STATE[i];
-    index_filterStateDB = i;
-    if ( typeFilter == row_filterStateDB.typeFilter  ) {
-      break;
-    }
-  }
-
-  /*
-  row_filterStateDB = {
-  typeFilter: "time",
-  start: ""
-  end : ""
-  }
-  */
-  return {
-    index_filterStateDB : index_filterStateDB,
-    row_filterStateDB : row_filterStateDB
-  }
-}
-function update_filterState( ROW_OPTION_FILTER_TARGET = {} ){
-
-  var typeFilter = ROW_OPTION_FILTER_TARGET.typeFilter;
-  var filterState_byTypeFilter = get_filterState_byTypeFilter( typeFilter );
- 
-  var index_filterStateDB = filterState_byTypeFilter.index_filterStateDB;
-  var row_filterStateDB = filterState_byTypeFilter.row_filterStateDB;
-
-  var row_filterStateMerge = { ...row_filterStateDB,  ...   ROW_OPTION_FILTER_TARGET }
-
-  //Set Update Filter State By Index
-  FILTER_STATE[index_filterStateDB] = row_filterStateMerge;
-}
-
 
 function get_dataLogAll() {
   return JSON.parse(localStorage.getItem(KEY_STORAGE_LOG)) || [];
 }
-function get_dataLogByFilter(){
+function get_dataLogByFilter( callback_filterStateUpdate = false ) {
 
-  console.group("+++ get_dataLogByFilter ++++");
+  //Update Filter State With Argument Callback
+  if (  callback_filterStateUpdate == false ) {
+    callback_filterStateUpdate = function() {
+      return 1;
+    }
+  }
+  callback_filterStateUpdate();
 
-  //Data DB Source
-  var data = get_dataLogAll();
+  var data_result = get_dataLogAll();
+
+  //Filtering data
   for (var i = 0; i < FILTER_STATE.length; i++) {
-    var row_filterState = FILTER_STATE[i];//Object
-    data = row_filterState.filter( data );
+    var row_filterState = FILTER_STATE[i];
+    data_result = row_filterState.filter( data_result  );
   }
 
-  //Sorting Default DESC By Time
-  data.sort((a, b) => new Date(b.time) - new Date(a.time));
+  return data_result;
+} 
 
+//Filter State Update
+function get_filterStateByFilterType( typeFilter_input = false ) {
+  //Mengembalikan object row filter state berdasarkan typFilter dan akan ditambahkan index filter state nya agar bisa melakukan update nantinya
+  var row_filterState = {};
+  for (var i = 0; i < FILTER_STATE.length; i++) {
+    row_filterState = FILTER_STATE[i];
+    if ( typeFilter_input == row_filterState.typeFilter ) {
+      //Menambahkan indexUpdate dari row FILTER STATE
+      row_filterState.indexUpdate = i;
+      break;
+    }
+  } 
 
-  console.groupEnd();
-  return data;
+  /*  
+  Contoh Pengembalian 
+  {
+    typeFilter : "namaFilter",
+    value : "",
+    indexUpdate : 0,
+    filter : function (data) {
+        ......
+    }, 
+    updateFilter : function( row_filterState ){
+      .........
+    }
 
+  }
+  */
+  console.log(`
+    ++++ get_filterStateByFilterType with ${typeFilter_input} 
+   +++++++ `, row_filterState);
+  return row_filterState;
 }
+function update_filterStateByFilterType( typeFilter_input, row_filterStateUpdate = {} ) {
+  var filterStateByFilteType = get_filterStateByFilterType( typeFilter_input );
+  var indexUpdate = filterStateByFilteType.indexUpdate;
+
+  //Lakukan update filter dengan method filter dari masing masing filter state berdasarkan indexUpdate 
+  FILTER_STATE[indexUpdate].updateFilter( row_filterStateUpdate );
+}
+
+
 // ++++++++++++ END OF GET DATA LOG WITH FILTER +++++++++++++
-
-
-function get_listFilter() {
-
-  var data = get_dataLogAll();
-
-  //Mengumpulkan type log dari sumber data terupdate pada session log
-  var LIST_LOG_TYPE = [];
-  var LIST_LOG_FILE = [];
-  for (var i = 0; i < data.length; i++) {
-    var row_data = data[i];
-
-    var logType = row_data.type;
-    LIST_LOG_TYPE.push( logType );
-
-    var fileLog = row_data.file;
-    LIST_LOG_FILE.push( fileLog );
-  }
-
-
-  //Distinct nilai yang sama
-  var result = {
-
-    logType : [...new Set(LIST_LOG_TYPE)],
-    logFile : [...new Set(LIST_LOG_FILE)]
-
-  }
-
-  return result;
-}
-
-
-
-
-
-
 
 function generateDummyLogs() {
 
@@ -281,12 +253,12 @@ function generateDummyLogs() {
   var contexts = ["Auth", "Dashboard", "API", "Profile", "System"];
   var files = ["auth.js", "dashboard.js", "api.js", "profile.js", "system.js"];
   var messages = [
-    "Login success",
-    "Undefined variable",
-    "Null pointer",
-    "API fetched",
-    "Something went wrong",
-    "Token expired"
+  "Login success",
+  "Undefined variable",
+  "Null pointer",
+  "API fetched",
+  "Something went wrong",
+  "Token expired"
   ];
 
   for (var i = 0; i < 50; i++) {

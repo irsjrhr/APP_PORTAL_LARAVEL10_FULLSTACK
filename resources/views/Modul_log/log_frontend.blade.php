@@ -43,13 +43,13 @@
 								<div class="form-group">
 									<label> Type Log </label>
 									<select class="form-control" name="logType">
-										<option value=""> All </option>
+										<option value="" class="all"> All </option>
 									</select>
 								</div>
 								<div class="form-group">
 									<label> File Log </label>
 									<select class="form-control" name="logFile">
-										<option value=""> All </option>
+										<option value="" class="all"> All </option>
 									</select>
 								</div>
 								<div class="form-group">

@@ -33,7 +33,7 @@ $(document).ready(function(e) {
 function CLEANUP_SPA_EVENT_NAMESPACE( route ) {
 	console.warn(`EVENT NAME SPACE ${SPA_EVENT_NAMESPACE} URL ROUTE!
 		${ route } DIHAPUS!!!
-`);
+		`);
 	$(document).off(SPA_EVENT_NAMESPACE);
 	$('body ').off(SPA_EVENT_NAMESPACE);
 }
@@ -117,9 +117,9 @@ function LOAD_PAGE_SPA( target_page = BASE_URL_PAGE, callback = false ) {
 	//SET DEBUG URL ACTIVE
 	LOAD_PAGE_URL = target_page; 
 	console.groupCollapsed(
-`%c+[++++ LOAD_PAGE_SPA with route ${ LOAD_PAGE_URL  } +++++]`,
-'color:white; background:#007bff; padding:2px 6px; border-radius:4px;'
-);
+		`%c+[++++ LOAD_PAGE_SPA with route ${ LOAD_PAGE_URL  } +++++]`,
+		'color:white; background:#007bff; padding:2px 6px; border-radius:4px;'
+		);
 	trace();
 
 	//Handling Error Callback Type
@@ -361,10 +361,10 @@ ROUTE.add( '/log/log_frontend', function( RouteObj ) {
 
 	LOAD_PAGE_SPA( RouteObj.route_spa, function() {
 
-		// Generate Value Format Time UI
-		generateTimeOptions("select[name='startTime']");
-		generateTimeOptions("select[name='endTime']");
-
+		// Generate Value Format Time UI Input
+		render_inputTime("select[name='startTime']");
+		render_inputTime("select[name='endTime']");
+		render_InputUIByDataLogAll();
 
 		//Form Filtering Submit
 		$('#form_filterLog').on('submit'+SPA_EVENT_NAMESPACE, function(e) {
@@ -373,10 +373,12 @@ ROUTE.add( '/log/log_frontend', function( RouteObj ) {
 		});
 		$('#btn_delete_allData').on('click'+SPA_EVENT_NAMESPACE, function  () {
 			deleteAllDataLog();
+			render_InputUIByDataLogAll();
 			load_data_table();
 		});
 		$('#btn_generate_dummy').on('click'+SPA_EVENT_NAMESPACE, function () {
 			generateDummyLogs();
+			render_InputUIByDataLogAll();
 			load_data_table();
 		});
 
@@ -385,85 +387,32 @@ ROUTE.add( '/log/log_frontend', function( RouteObj ) {
 
 	function load_data_table( option_filter = true ){
 
+		//++++++ Render and Load Data Table Based Filter
+		//Get Data Log With Filter
+		var data_log = get_dataLogByFilter( function() {
+			//Update Filter State By "time"  
+			var input_startTime = $('[name=startTime]');
+			var input_endTime = $('[name=endTime]');
+			update_filterStateByFilterType( 'time', {
+				start : input_startTime.val(),
+				end : input_endTime.val()
+			});
 
-		//+++++ Render Table 
-		update_filterStateByUI();
+			//Update Filter State By "logFile"  
+			var input_logFile = $('[name=logFile]');
+			update_filterStateByFilterType( 'logFile', {
+				value : input_logFile.val()
+			});
 
-		var data_log_filter = get_dataLogByFilter();
-		render_tableLog(data_log_filter);
-
-		// ++++ Render Filter UI 
-		var data_listFilter = get_listFilter();
-		//Render list type log 
-		var rowList_logType = data_listFilter.logType;
-		render_logType( rowList_logType );
-		//Render list file log 
-		var rowList_logFile = data_listFilter.logFile;
-		render_logFile( rowList_logFile );
-
-	}
-
-	function update_filterStateByUI() {
-
-		// Update Filter Time Range
-		var startTime = $('[name=startTime]');
-		var endTime = $('[name=endTime]');
-		update_filterState({
-			typeFilter: 'time',
-			start : startTime.val(),
-			end : endTime.val()
+			//Update Filter State By "logType"
+			var input_logType = $('[name=logType]');  
+			update_filterStateByFilterType( 'logType', {
+				value : input_logType.val()
+			});
 		});
-
-		// Update Filter LogType
-		var logType = $('[name=logType]');
-		update_filterState({
-			typeFilter: 'logType',
-			value : logType.val()
-
-		});
-
-		// Update Filter logFile
-		var logFile = $('[name=logFile]');
-		update_filterState({
-			typeFilter: 'logFile',
-			value : logFile.val()
-
-		});
+		render_tableLog( data_log );
 	}
-	function formatToDBTime(dateString) {
-		var date = new Date(dateString);
-
-		var yyyy = date.getFullYear();
-		var mm = String(date.getMonth() + 1).padStart(2, "0");
-		var dd = String(date.getDate()).padStart(2, "0");
-
-		var hh = String(date.getHours()).padStart(2, "0");
-		var min = String(date.getMinutes()).padStart(2, "0");
-		var ss = String(date.getSeconds()).padStart(2, "0");
-
-		return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
-	}
-	function generateTimeOptions(selector) {
-
-		for (var h = 0; h < 24; h++) {
-
-			// 00 menit
-			var hour = String(h).padStart(2, "0");
-			var min1 = "00";
-			var min2 = "30";
-
-			$(selector).append(
-		`<option value="${hour}:${min1}">${hour}:${min1}</option>`
-		);
-
-			$(selector).append(
-		`<option value="${hour}:${min2}">${hour}:${min2}</option>`
-		);
-		}
-	}
-	function render_tableLog( data_log_filter = [] ) {
-
-
+	function render_tableLog( data_log = [] ) {
 
 		var table_logData = $('#table_logData');
 		var tbody = table_logData.find('tbody');
@@ -472,8 +421,8 @@ ROUTE.add( '/log/log_frontend', function( RouteObj ) {
 		tbody.html("");
 
 		//Menambahkan kolom table berdasarkan row data dan membentuk LOG_TYPE_LIST
-		for (var i = 0; i < data_log_filter.length; i++) {
-			var row_data = data_log_filter[i];
+		for (var i = 0; i < data_log.length; i++) {
+			var row_data = data_log[i];
 			var tr = `
 			<tr>
 			<td>${i + 1}</td>
@@ -490,97 +439,85 @@ ROUTE.add( '/log/log_frontend', function( RouteObj ) {
 		}
 
 		//Render update counting data log 
-		var banyak_data = data_log_filter.length
+		var banyak_data = data_log.length;
 		var banyak_data_el = $('.box_dashboard .banyak_data');
 
 		if ( banyak_data_el.length > 0 ) {
 			banyak_data_el.text( banyak_data )
 		}
 	}
+	function render_inputTime(selector) {
 
+		for (var h = 0; h < 24; h++) {
 
-	function get_filterActiveByKey( typeFilterTarget ) {
-		//KeyFilterTarget merupakan nama property pada object yang memiliki typeFilter dengan nilai typeFilterTarget
+			// 00 menit
+			var hour = String(h).padStart(2, "0");
+			var min1 = "00";
+			var min2 = "30";
 
-		//Select option element based value OPTION_FILTER_STATE untuk row filter option logType
+			$(selector).append(
+				`<option value="${hour}:${min1}">${hour}:${min1}</option>`
+				);
 
-		//Mengambil row data yang property typeFilternye memiliki nilai yang sama dengan argumen typeFilter
-		var row_filter_active = OPTION_FILTER_STATE.filter(function( row_data ){
-
-			return row_data.typeFilter == typeFilterTarget;
-		});
-		var filterVal = row_data[keyFilterTarget]; //Lihat Format Masing Masing row filter 
-
-		return filterVal;
-	}
-
-	function render_logType ( LOG_TYPE_LIST = [] ) {
-		//++++ Render Log Type List
-
-
-		// Tambahkan element option awal untuk nilai ALL
-		var select_logType = $('[name=logType]');
-		select_logType.html(" ");
-		var option_all = `
-		<option value=""> All </option>
-		`;
-		select_logType.append( option_all );
-
-
-		//+++ Tambahkan element option based LOG_TYPE_LIST dan Melakukan selected untuk element option based on filter yang sedang di apply di row dengan typeFilter logType pada OPTION_FILTER_STATE yang terupdate oleh buildDataFilter()
-
-		//Mengambil nilai logType yang sedang dipilih dan di implementasikan ke option value sebagai yang terselected 
-		var get_filterStateActiveTarget =  get_filterState_byTypeFilter( 'logType' );
-		var filterStateActiveTarget = get_filterStateActiveTarget.row_filterStateDB;
-		var logTypeActive = filterStateActiveTarget.value;
-		for (var i = 0; i < LOG_TYPE_LIST.length; i++) {
-
-			//Menentukan atribut selected based yang tersimpan di OPTION_FILTER_STATE pada row option dengan filterType logType 
-			var logType = LOG_TYPE_LIST[i];
-			var option_atrSelected = ( logType == logTypeActive  ) ?
-			"selected"
-			:
-			""
-			;
-			var option = `<option value="${logType}" ${option_atrSelected}> ${logType} </option>`;
-			select_logType.append( option );
-
+			$(selector).append(
+				`<option value="${hour}:${min2}">${hour}:${min2}</option>`
+				);
 		}
-
 	}
-	function render_logFile ( LOG_FILE_LIST = [] ) {
-		//++++ Render Log Type List
+	function render_InputUIByDataLogAll(){
+		var data_log = get_dataLogAll();
+		var LIST_LOGTYPE = [];
+		var LIST_LOGFILE = [];
+		for (var i = 0; i < data_log.length; i++) {
+			var row_log = data_log[i];
+			//Mendapatkan list log file
+			if ( LIST_LOGFILE.includes( row_log.file ) == false ) {
+				LIST_LOGFILE.push( row_log.file );
+			}
+			//Mendapatkan list log type
+			if ( LIST_LOGTYPE.includes( row_log.type ) == false ) {
+				LIST_LOGTYPE.push( row_log.type );
+			}
+		} 
 
-		var select_logFile = $('[name=logFile]');
-		select_logFile.html(" ");
-		// Isi option awal untuk nilai ALL
-		var option_all = `
-		<option value=""> All </option>
-		`;
-		select_logFile.append( option_all );
-
-
-
-		//Mengambil nilai logFile yang sedang dipilih dan di implementasikan ke option value sebagai yang terselected 
-		var get_filterStateActiveTarget =  get_filterState_byTypeFilter( 'logFile' );
-		var filterStateActiveTarget = get_filterStateActiveTarget.row_filterStateDB;
-		var logFileActive = filterStateActiveTarget.value;
-
-		for (var i = 0; i < LOG_FILE_LIST.length; i++) {
-
-			//Menentukan atribut selected based yang tersimpan di OPTION_FILTER_STATE pada row option dengan filterType logFile 
-			var logFile = LOG_FILE_LIST[i];
-			var option_atrSelected = ( logFile == logFileActive  ) ?  
-			"selected"
-			:
-			""
-			;
-			var option = `<option value="${logFile}" ${option_atrSelected}> ${logFile} </option>`;
-			select_logFile.append( option );
-
+		//++++ Render List Input +++++++++++
+		render_inputUILogFile( LIST_LOGFILE );
+		render_inputUILogType( LIST_LOGTYPE );
+	}
+	function render_inputUILogFile( LIST_LOGFILE ) {
+		var input_logFile = $('[name=logFile]');
+		input_logFile.find('option').not('.all').remove();
+		for (var i = 0; i < LIST_LOGFILE.length; i++) {
+			var logFile = LIST_LOGFILE[i];
+			var optionLogFile = `
+			<option> ${ logFile } </option>
+			`;
+			input_logFile.append( optionLogFile );
 		}
+	}
+	function render_inputUILogType( LIST_LOGTYPE ) {
+		var input_logFile = $('[name=logType]');
+		input_logFile.find('option').not('.all').remove();
+		for (var i = 0; i < LIST_LOGTYPE.length; i++) {
+			var logFile = LIST_LOGTYPE[i];
+			var optionLogFile = `
+			<option> ${ logFile } </option>
+			`;
+			input_logFile.append( optionLogFile );
+		}
+	}
+	function formatToDBTime(dateString) {
+		var date = new Date(dateString);
 
+		var yyyy = date.getFullYear();
+		var mm = String(date.getMonth() + 1).padStart(2, "0");
+		var dd = String(date.getDate()).padStart(2, "0");
 
+		var hh = String(date.getHours()).padStart(2, "0");
+		var min = String(date.getMinutes()).padStart(2, "0");
+		var ss = String(date.getSeconds()).padStart(2, "0");
+
+		return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
 	}
 
 
@@ -1065,19 +1002,19 @@ ROUTE.add( '/user/tambah_project/', function( RouteObj ) {
 				<p> ${ jarak_km } km dari jarak kamu </p>
 				<button type="button" class="btn btn-success btn_pilih_teknisi"> Pilih </button>
 				</div>
-			</div>`;
+				</div>`;
 
 				//Tambahkan cardnya 
-			el_row_teknisi.append( el_card_teknisi );
+				el_row_teknisi.append( el_card_teknisi );
+			}
+
+
+
 		}
 
 
 
-	}
-
-
-
-});
+	});
 
 });
 //https://url_app_fe/user/monitoring
