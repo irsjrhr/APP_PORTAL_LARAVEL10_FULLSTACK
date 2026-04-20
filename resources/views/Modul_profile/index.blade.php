@@ -1,11 +1,11 @@
 <style type="text/css">
-.btn_corner{
-	color: #fff;
-	font-size: 30px;
-}
+	.btn_corner{
+		color: #fff;
+		font-size: 30px;
+	}
 </style>
 
-	
+
 <link rel="stylesheet" type="text/css" href="{{ asset('') }}asset/css/profile.css">
 
 <section class="section_content" data-fungsi="profile">
@@ -16,71 +16,209 @@
 	</div>
 
 
-	<!-- Container Content -->
-	<div class="container-fluid container_content">
-		<!-- Batas bungkus semua elemen content dibuat -->
+	<div class="container-fluid">
 
-		{{-- row profile --}}
-		<div class="row row_profile">
-			<button class="btn btn-primary btn_edit_profile" data-toggle="modal" data-target="#modal_update_profile">
-				<i class="fas fa-pen"></i>
-				Edit
-			</button>
-			<div class="profile_img text-center">
-				<img id="source_file_profile" src="{{asset('')}}asset/gam/user.png">
+		{{-- Row Thumbnail --}}
+		<div class="row row_cover pb-5" id="row_thumbnail">
+
+			<div class="col-12 container_thumbnail">
+				<div class="img_thumbnail">
+				</div>
+				<div class="col_profile">
+					<img src="{{asset('')}}asset/gam/user.png">
+				</div>
+				<button class="btn btn-default btn_edit_profile" data-target="#modal_update_profile" data-toggle="modal">
+					<i class="fas fa-pen"></i>
+				</button>
 			</div>
-			<div class="col-md-6">
-				<h4 class="text_title" id="nama">
-					- 
+
+			<div class="col-12 container_profile_information">
+				<h4 class="fw-bold mb-0">
+					Irshandy Juniar Hardadi 
 				</h4>
-				<h5 class="text_info">
-					User Id : <span id="user"> - </span>
-				</h5>
-				<h5 class="text_info">
-					Level : <span id="level"> - </span>
-				</h5>
+				<p class="mb-0">
+					<span id="detail_label"> Regional Manager </span>
+					-
+					<span id="detail_label"> RMM </span>
+				</p>
+				<small class="text-muted">
+					Territory: <span id="detail_territory"> BANDUNG SELATAN ( D3220 ) </span> |
+					Regional : <span id="detail_ordertype"> Region 2 </span>
+				</small>
 			</div>
+
+
 		</div>
-		{{-- end of row profile --}}
+		{{-- End Of Row Thumbnail --}}
 
-		{{-- row info --}}
-		<div class="row row_info">
-			<div class="col-sm-12" style="margin-bottom: 0;">
-				<h4 class="text_title mb-5">
-					Personal Information
+
+		{{-- Row Personal Information --}}
+		<div class="row row_modal_profile row_cover" id="row_personalInformation">
+			<div class="col-12 col_header">
+				<h4 class="fw-bold mb-0">
+					Personal Information                                
 				</h4>
-				<div class="container-fluid">
+			</div>
 
-					<!-- Row Card Info -->
-					<div class="row row_card_info">
-						<div class="col-sm-3 col_card_info">
-							<div class="card">
-								<div class="card-body" >
-									<p class="text_title"> Email </p>
-									<p class="text_info" id="email"> user@gmail.com </p>
-								</div>
-							</div>
+
+			<div class="col-md-4 col_card_info">
+				<div class="card">
+					<div class="card-body d-flex align-items-center">
+						<div class="icon_profile bg-primary text-white">
+							<i class="fas fa-id-card"></i>
 						</div>
-						<div class="col-sm col_card_info">
-							<div class="card">
-								<div class="card-body">
-									<p class="text_title"> Alamat </p>
-									<p class="text_info" id="alamat">  - </p>
-								</div>
+						<div>
+							<small class="text-muted d-block">NIK</small>
+							<div class="fw-semibold">12345678</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 col_card_info">
+				<div class="card">
+					<div class="card-body d-flex align-items-center">
+						<div class="icon_profile bg-info text-white">
+							<i class="fas fa-user"></i>
+						</div>
+						<div>
+							<small class="text-muted d-block">Personal</small>
+							<div class="fw-semibold">
+								Laki-laki 
+								• Tidak Kawin
 							</div>
 						</div>
 					</div>
-					<!-- End Of Row Card Info -->
+				</div>
+			</div>
 
 
+			<div class="col-md-4 col_card_info">
+				<div class="card">
+					<div class="card-body d-flex align-items-center">
+						<div class="icon_profile bg-secondary text-white">
+							<i class="fas fa-calendar"></i>
+						</div>
+						<div>
+							<small class="text-muted d-block">Tanggal Lahir</small>
+							<div class="fw-semibold">
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="col-md-4 col_card_info">
+				<div class="card">
+					<div class="card-body d-flex align-items-center">
+						<div class="icon_profile bg-warning text-white">
+							<i class="fas fa-phone"></i>
+						</div>
+						<div>
+							<small class="text-muted d-block">Kontak</small>
+							<div class="fw-semibold">
+								0123456789
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 col_card_info">
+				<div class="card">
+					<div class="card-body d-flex align-items-center">
+						<div class="icon_profile bg-dark text-white">
+							<i class="fas fa-calendar-check"></i>
+						</div>
+						<div>
+							<small class="text-muted d-block">Tanggal Masuk</small>
+							<div class="fw-semibold">
+								23 Dec 2025
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 col_card_info">
+				<div class="card">
+					<div class="card-body d-flex align-items-center">
+						<div class="icon_profile bg-success text-white">
+							<i class="fas fa-user-check"></i>
+						</div>
+						<div>
+							<small class="text-muted d-block">Status</small>
+							<div class="fw-semibold text-success">
+								Aktif
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 col_card_info">
+				<div class="card">
+					<div class="card-body d-flex align-items-center">
+						<div class="icon_profile bg-info text-white">
+							<i class="fas fa-graduation-cap"></i>
+						</div>
+						<div>
+							<small class="text-muted d-block">Pendidikan</small>
+							<div class="fw-semibold">
+								S1
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 col_card_info">
+				<div class="card">
+					<div class="card-body d-flex align-items-center">
+						<div class="icon_profile bg-secondary text-white">
+							<i class="fas fa-id-card-alt"></i>
+						</div>
+						<div>
+							<small class="text-muted d-block">No KTP</small>
+							<div class="fw-semibold">
+								-
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 col_card_info">
+				<div class="card">
+					<div class="card-body d-flex align-items-start">
+						<div class="icon_profile bg-dark text-white">
+							<i class="fas fa-map-marker-alt"></i>
+						</div>
+						<div>
+							<small class="text-muted d-block">Alamat</small>
+							<div class="fw-semibold">
+								Rumah
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
 		</div>
-		{{-- end of row info --}}
+		{{-- End Of Row Personal Information --}}
+
 
 	</div>
-	<!-- End Of Container Content -->
+
 
 	<div class="modal fade" id="modal_update_profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">

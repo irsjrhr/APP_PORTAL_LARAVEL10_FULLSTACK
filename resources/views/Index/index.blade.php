@@ -10,7 +10,6 @@ $SPA_ROUTE_PREFIX_KEYWORD = env('SPA_ROUTE_PREFIX_KEYWORD');
 
 
 <script type="text/javascript">
-
     window.ENV = {
         BASE_URL_PAGE: @json($BASE_URL_PAGE),
         URL_SERVICE_CI: "BELUM DIISI",
