@@ -50,7 +50,7 @@ function logError(error, context = "", type = "GLOBAL") {
     userAgent: navigator.userAgent
   };
 
-  console.warn("LOG INTERN:", log);
+  console.warn( KEY_STORAGE_LOG, log);
   saveDataLog(log);
 }
 function saveDataLog(log) {
