@@ -65,7 +65,6 @@ function deleteAllDataLog(){
 // ++++++++++++ GET DATA LOG WITH FILTER +++++++++++++
 
 //==== FILTERING SECTION ====
-
 var FILTER_STATE = [
 
 {
@@ -210,7 +209,7 @@ function get_filterStateByFilterType( typeFilter_input = false ) {
   for (var i = 0; i < FILTER_STATE.length; i++) {
     row_filterState = FILTER_STATE[i];
     if ( typeFilter_input == row_filterState.typeFilter ) {
-      //Menambahkan indexUpdate dari row FILTER STATE
+      //Menambahkan property indexUpdate dari row FILTER STATE
       row_filterState.indexUpdate = i;
       break;
     }
