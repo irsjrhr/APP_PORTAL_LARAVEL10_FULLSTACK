@@ -24,7 +24,7 @@
 			<!-- End Of col_maps -->
 
 			<!-- col_table -->
-			<div class="col-sm col_table" style="max-width: 300px;">
+			<div class="col-sm col_table">
 				<table class="table table_option">
 					<tr>
 						<td style="display: flex;">

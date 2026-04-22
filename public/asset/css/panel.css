@@ -193,6 +193,7 @@ header{
 .content{
 	position: relative;
 	padding: 0;
+	min-width: 0; /* Mencegah flexbox auto wrap saat ada konten lebar */
 }
 
 .content .main_container{

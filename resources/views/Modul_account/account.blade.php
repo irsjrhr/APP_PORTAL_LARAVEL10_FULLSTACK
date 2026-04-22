@@ -22,7 +22,7 @@
 
 
 		<div class="row">
-			<div class="col-12" style="max-width: 300px;">
+			<div class="col-12">
 
 
 				{{-- Table data container --}}

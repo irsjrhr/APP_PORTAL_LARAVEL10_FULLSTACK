@@ -21,7 +21,7 @@
 
 
 		<div class="row">
-			<div class="col-12" style="max-width: 300px;">
+			<div class="col-12">
 				<div class="table_data_container" data-fungsi="project" data-api-endpoint="{{ env('URL_SERVICE_BE') . "project"}}">
 					<table class="table table_option">
 						<tr>
