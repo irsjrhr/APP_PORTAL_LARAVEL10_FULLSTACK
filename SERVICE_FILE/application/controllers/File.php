@@ -176,7 +176,7 @@ class File extends CI_Controller {
 			],
 		];
 
-    // Kirim response
+    	// Kirim response
 		$this->Base_model->send_response($data, 200);
 	}
 

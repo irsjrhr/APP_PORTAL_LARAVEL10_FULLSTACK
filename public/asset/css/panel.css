@@ -534,9 +534,15 @@ header .col_content.title_app *{
 	margin-left: 10px;
 	color: #fff !important;
 }
+
+/*Container Option*/
 .container_option{
 	display: block!important!important;
 	margin-right: 30px;
+	display: flex;
+}
+.container_option > .item_option{
+	flex: 1;
 }
 .container_option .btn_submit_opt{
 	top: 0;

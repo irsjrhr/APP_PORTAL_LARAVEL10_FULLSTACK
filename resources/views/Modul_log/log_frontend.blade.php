@@ -27,54 +27,57 @@
 
 				<div class="table_data_container">
 					<div class="container_option">
+						{{-- Item Option --}}
+						<div class="item_option">
+							<form class="form_filterLog" id="form_filterLog">
+								<div class="filter_section">
+									<div class="form-group">
+										<label> Start Time </label>
+										<select class="form-control" name="startTime">
+										</select>
+									</div>
+									<div class="form-group">
+										<label> End Time </label>
+										<select class="form-control" name="endTime">
+										</select>
+									</div>
+									<div class="form-group">
+										<label> Type Log </label>
+										<select class="form-control" name="logType">
+											<option value="" class="all"> All </option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label> File Log </label>
+										<select class="form-control" name="logFile">
+											<option value="" class="all"> All </option>
+										</select>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-primary">
+											<i class="fas fa-filter"></i>
+											Apply Data
+										</button>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-danger" id="btn_delete_allData">
+											<i class="fas fa-trash"></i>
+											Reset Data
+										</button>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-warning" id="btn_generate_dummy">
+											<i class="fas fa-pen"></i>
+											Generate Data Log Dummy
+										</button>
+									</div>
 
-						<form class="form_filterLog" id="form_filterLog">
-							<div class="filter_section">
-								<div class="form-group">
-									<label> Start Time </label>
-									<select class="form-control" name="startTime">
-									</select>
-								</div>
-								<div class="form-group">
-									<label> End Time </label>
-									<select class="form-control" name="endTime">
-									</select>
-								</div>
-								<div class="form-group">
-									<label> Type Log </label>
-									<select class="form-control" name="logType">
-										<option value="" class="all"> All </option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label> File Log </label>
-									<select class="form-control" name="logFile">
-										<option value="" class="all"> All </option>
-									</select>
-								</div>
-								<div class="form-group">
-									<button class="btn btn-primary">
-										<i class="fas fa-filter"></i>
-										Apply Data
-									</button>
-								</div>
-								<div class="form-group">
-									<button class="btn btn-danger" id="btn_delete_allData">
-										<i class="fas fa-trash"></i>
-										Reset Data
-									</button>
-								</div>
-								<div class="form-group">
-									<button class="btn btn-warning" id="btn_generate_dummy">
-										<i class="fas fa-pen"></i>
-										Generate Data Log Dummy
-									</button>
+
 								</div>
 
-
-							</div>
-
-						</form>
+							</form>
+						</div>
+						{{-- End Of Item Option --}}
 					</div>
 					<table class="table table_data" id="table_logData">
 						<thead>

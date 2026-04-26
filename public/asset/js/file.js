@@ -44,12 +44,14 @@ $(document).ready(function() {
 		var indicator_tipe_penyimpanan = $('.indicator_tipe_penyimpanan');
 		var indicator_tipe_penyimpanan_target = $(this);
 
+		// Melakukan set nilai TIPE_PENYIMPANAN_PARAM untuk jadi parameter get request ke file lain. 
 		var id = indicator_tipe_penyimpanan_target.attr('id');
 		if ( id == "all" ) {
 			id = false;
 		}
-
 		TIPE_PENYIMPANAN_PARAM = id;
+
+		//Memunculkan dan menghilangkan 
 		indicator_tipe_penyimpanan.removeClass('active');
 		indicator_tipe_penyimpanan_target.addClass('active');
 
@@ -77,6 +79,7 @@ $(document).ready(function() {
 
 
 	//+++++++++++ Method event pada Modal View File +++++++++++ 
+
 
 	// Event untuk melihat file 
 	$('body').on('click', '.btn_modal_view', function() {
@@ -151,7 +154,6 @@ $(document).ready(function() {
 
 		//Munculkan load file
 		el_load_modalFileTambah("show", "Menambahkan data....");
-
 		//Melakukan upload data dan menambahkan ke database 
 		var url_endpoint = URL_API_FILE_LOKAL + "/post_tambah_file";
 		console.log("+++ Melakukan request POST ke", url_endpoint);
@@ -342,12 +344,12 @@ function load_ajax_modalFileSelect() {
 	//Munculin indicator load 
 	el_load_modalSelectFile('show', "Fetch data.....");
 
+
+	//Melakukan request ke BE Modul File, Untuk mendapatkan data file
 	var data_param = {};
 	if ( TIPE_PENYIMPANAN_PARAM != false ) {
 		data_param = { by_tipe_penyimpanan : TIPE_PENYIMPANAN_PARAM };
 	}
-
-	//Melakukan request ke BE Modul File
 	get_data( URL_API_FILE_LOKAL, data_param, function( response ) {
 
 		var data_response = response; //Sudah dalam bentuk JSON
