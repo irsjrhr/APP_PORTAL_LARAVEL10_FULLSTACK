@@ -24,7 +24,7 @@
 
 		<div class="row">
 			<div class="col-12">
-
+				
 				<div class="table_data_container">
 					<div class="container_option">
 						{{-- Item Option --}}

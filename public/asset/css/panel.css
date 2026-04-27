@@ -1,5 +1,5 @@
 :root {
-  --max-height-active: 300px;
+	--max-height-active: 300px;
 }
 
 *{
@@ -350,38 +350,89 @@ header{
 }
 
 
-
+/*Table Data Container*/
+.table_data_container {
+	max-height: 500px; /* atur sesuai kebutuhan */
+	overflow-y: auto;
+	position: relative;
+}
+.container_option{
+	margin-right: 30px;
+	display: flex !important;
+	column-gap: 30px;
+	width: 100%;
+	background: #fff;
+	height: auto;
+	padding: 20px;
+	padding-top: 20px;
+	padding-bottom: 0;
+}
+.container_option > .item_option{
+	flex: 0 1 auto;
+}
+.container_option .item_option_flex{
+	display: flex;
+	column-gap: 10px;
+}
+.container_option .btn_tambah_data{
+	background: green;
+	color: #fff;
+}
+.container_option .btn_load{
+	margin-right: 0!important;
+}
+/*Table data container ft Container Option*/
 table{
 	border-top: none !important;
 }
-
-table .row_header{
-	background: #ccc;
-	position: relative;
-}
-
 .btn_sidebar{
 	cursor: pointer;
 }
-
 .row_header .btn_sidebar{
 	position: absolute;
 	top: 0;
 	right: 10px;
-
 }
-table td{
+
+.table_data {
+	border-collapse: collapse;
+	width: 100%;
+}
+.table_data thead th, 
+.table_data thead td 
+{
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	border-bottom: 2px solid #ddd;
+}
+/* optional biar lebih enak dilihat */
+.table_data thead tr.row_header,
+.table_data thead th, 
+.table_data thead td
+{
+	background: #ccc; /* penting biar gak transparan */
+	/*box-shadow: 0 2px 2px rgba(0,0,0,0.05);*/
+}
+.table_data thead td i{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%);
+}
+
+table.table_data td{
 	text-align: center;
 }
-
-table tr{
+table.table_data tr{
 	border-bottom: 1px solid #ccc;
 	position: relative;
 }
-table .btn_opt{
+table.table_data .btn_opt{
+
 
 }
-table .menu_opt{
+table.table_data .menu_opt{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -408,19 +459,19 @@ table .menu_opt{
 	color: #fff;
 	cursor: pointer;
 }
-table .row_option{
+table.table_data .row_option{
 	border: none;
 }
-table img{
+table.table_data img{
 	width: 30px;
 	height: 30px;
 }
-table img.profile{
+table.table_data img.profile{
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
 }
-table .label{
+table.table_data .label{
 	width: auto;
 	height: auto;
 	padding: 2px;
@@ -446,6 +497,16 @@ table .label{
 }
 
 
+.table{
+	background: #fff !important;
+}
+table td:last-child{
+	padding-right: 30px;
+}
+
+
+
+
 
 @keyframes animasi_label{
 	0%{
@@ -456,37 +517,13 @@ table .label{
 	}
 }
 
-.table_option{
-	border: none;
-}
-.table_option .btn_tambah_data{
-	background: green;
-	color: #fff;
-}
-.table_option .container_option{
-	width: 200px;
-	position: relative;
-}
-.table_option td{
-	border: none;
-	text-align: left;
-}
-.btn_submit_opt{
-	position: absolute;
-	top: -10px;
-	right: 10px;
-}
+
 
 .row_modal_menu > div{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
-
-
-
-
-
 .header_admin_page .nav_header{
 	position: fixed;
 	width: 100%;
@@ -516,8 +553,6 @@ header .col_content.title_app{
 header .col_content.title_app *{
 	margin-bottom: 0 !important;
 }
-
-
 .sidebar{
 	background: #fff !important;
 	padding-top: 30px;
@@ -526,35 +561,6 @@ header .col_content.title_app *{
 .sidebar *{
 	color: #000;
 }
-
-.table_option{
-
-}
-.table_option .btn_filter{
-	margin-left: 10px;
-	color: #fff !important;
-}
-
-/*Container Option*/
-.container_option{
-	display: block!important!important;
-	margin-right: 30px;
-	display: flex;
-}
-.container_option > .item_option{
-	flex: 1;
-}
-.container_option .btn_submit_opt{
-	top: 0;
-	right: -45px;
-}
-.table{
-	background: #fff !important;
-}
-table td:last-child{
-	padding-right: 30px;
-}
-
 
 
 .monitoring_maps{

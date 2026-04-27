@@ -72,7 +72,7 @@ const ROUTE = {
 
 		console.group("++++++ LOG LOAD METHOD +++++++++");
 
-		// Mencari object roue berdasarkan argumen route yang dilempr dengan route di que que object route 
+		// (Traversing ) Mencari object roue berdasarkan argumen route yang dilempr dengan route di que que object route 
 		var ROUTE_INIT_EXIST = false;
 		var QUE_ROUTE = this.QUE_ROUTE;
 		for (var i = 0; i < QUE_ROUTE.length; i++) {

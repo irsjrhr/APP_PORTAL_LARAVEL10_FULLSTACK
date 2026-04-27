@@ -23,52 +23,61 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="table_data_container" data-fungsi="transaksi_pemasukan" data-api-endpoint="{{ env('URL_SERVICE_BE') . "transaksi_pemasukan" }}">
-					<table class="table table_option">
 
-						<tr>
-							<td style="display: flex;">
+					{{-- Container Option - Flex Child --}}
+					<div class="container_option">
+						{{-- Item Option --}}
+						<div class="item_option">
+							<div class="item_option_flex">
 								<button class="btn btn-primary btn_load mr-2">
 									<i class="fas fa-recycle"></i>
 								</button>
 								<button class="btn btn-default btn_tambah_data" data-toggle="modal" data-target="#modal_tambah">
 									<i class="fas fa-plus"></i>
 								</button>
-							</td>
-							<!-- Form Search -->
-							<td>
-								<div class="container_option">
-									<form id="form_search">
-										<div class="form-group">
-											<input type="text" class="form-control" name="search_keyword" placeholder="By Nama Transaksi">
-										</div>
+								<!-- 							<button class="btn btn-warning btn_filter">
+									<i class="fas fa-filter"></i>
+								</button> -->
+							</div>
+						</div>
+						{{-- Item Option --}}
+						<div class="item_option">
+							<form id="form_search">
+								<div class="item_option_flex">
+									<div class="form-group">
+										<input type="text" class="form-control" name="search_keyword" placeholder="By User, Email, Nama">
+									</div>
+									<div class="form-group">
 										<button class="btn btn-secondary btn_submit_opt">
 											<i class="fas fa-search"></i>
 										</button>
-									</form>
-								</div>
-							</td>
-							<!-- End Of Form Search -->
+									</div>
+								</div>	
+							</form>
+						</div>
 
-							<!-- Form Filter Status -->
-							<td>
-								<div class="container_option">
-									<form class="form_filter" id="form_filter_status">
-										<div class="form-group">
-											<select class="form-control" name="filter_keyword">
-												<option value="active"> Active </option>
-												<option value="disabled"> Disabled </option>
-											</select>
-										</div>
+						{{-- Item Option --}}
+						<div class="item_option">
+							<form class="form_filter" id="form_filter_status">
+								<div class="item_option_flex">
+									<div class="form-group">
+										<select class="form-control" name="filter_keyword">
+											<option value="active"> Active </option>
+											<option value="disabled"> Disabled </option>
+										</select>
+									</div>
+									<div class="form-group">
 										<button class="btn btn-warning btn_filter btn_submit_opt">
 											<i class="fas fa-filter"></i>
 										</button>
-									</form>
+									</div>
 								</div>
-							</td>
-							<!-- End Of Form Filter Status -->
+							</form>
+						</div>
+						
+					</div>			
+					{{-- End Of Container Option --}}
 
-						</tr>
-					</table>
 					<table class="table table_data">
 
 						<thead>

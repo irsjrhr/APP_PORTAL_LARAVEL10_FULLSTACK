@@ -26,6 +26,8 @@ class File extends CI_Controller {
 
 		$where_clause = [];
 
+		
+
 		//Filter berdasarkan data user login. Ini filter Wajib! 
 		if ( $this->Base_service->user_login != "TIDAK_ADA_USER_LOGIN" ) {
 			$user_login = $this->Base_service->user_login;

@@ -1,8 +1,8 @@
 // Script ini terhubung dengan api.js
 var URL_SERVICE_APP = URL_SERVICE_FILE; //Tempat Aplikasi Service BE Route Utama Basis CI 
-var URL_API_FILE_LOKAL = URL_SERVICE_APP + "File"; //Controller service file di aplikasi route utama
+var URL_API_FILE_LOKAL = URL_SERVICE_APP + "file"; //Controller service file di aplikasi route utama
 var URL_API_FILE_CLOUD = URL_SERVICE_APP + "service_cloud/"; //URL SERVICE BE CLOUD untuk melakukan penyimpanan ke cloud yang terletak di aplikasi service file utama
-var URL_ASSET_STORAGE = URL_SERVICE_APP + "asset_storage/"; //Tempat user menyimpan file secara lokal
+var URL_FILE_ICON = BASE_URL_PAGE + "asset/gam/fileModal/"
 var TIPE_PENYIMPANAN_PARAM = false; //Menampilkan semua file tanpa filter kategori
 
 var OBJ_MEDIA = {
@@ -426,7 +426,7 @@ function getFileIconSrc( source_file ) {
 		}
 	});
 
-	FILE_ICON.src = URL_SERVICE_APP + "asset/gam/" + iconSrc;
+	FILE_ICON.src = URL_FILE_ICON + iconSrc;
 	FILE_ICON.ext_file = ext_file;
 	FILE_ICON.source_file = source_file;
 
