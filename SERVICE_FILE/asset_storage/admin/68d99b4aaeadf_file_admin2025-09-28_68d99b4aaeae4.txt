@@ -1,1 +1,0 @@
- Membuat relasi id antara elemen cover_header, produk, dan cover_footer agar tidak tertukar

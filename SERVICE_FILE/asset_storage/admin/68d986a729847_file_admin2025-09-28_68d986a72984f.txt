@@ -1,8 +1,0 @@
-
-
-Masalahnya :
-- Tidak adanya penekanan terhadaps soft skill yang trend terjadi saat ini pada pendidikan formal atau sekolah
-- Terlalu padatnya jadwal sekolah, sehingga tidak adanya waktu untuk belajar soft skill
-
-Solusi : 
--  Membuat aplikasi e learning Soft SKill dengan harga terjangkau.

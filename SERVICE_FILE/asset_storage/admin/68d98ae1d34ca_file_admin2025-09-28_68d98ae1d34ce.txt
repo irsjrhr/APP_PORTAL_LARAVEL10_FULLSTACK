@@ -1,6 +1,0 @@
-<script>
-
-alert('s');
-
-
-</script>
