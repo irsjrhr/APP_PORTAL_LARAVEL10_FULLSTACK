@@ -17,21 +17,18 @@
 <script type="text/javascript" src="{{asset('')}}asset/js/app.js"></script>
 <script type="text/javascript" src="{{asset('')}}asset/js/chart_main.js"></script>
 <script type="text/javascript" src="{{asset('')}}asset/js/api.js"></script>
-
 {{-- +++++++++++ END OF APP CORE  +++++++++++ --}}
 
-
+L
 {{-- +++++++++++ SPA CORE +++++++++++ --}}
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/core.js"></script>
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/core_route.js"></script>
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/core_table.js"></script>
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/core_monitoring.js"></script>
-{{-- <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/search_filter.js"></script> --}}
+
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/main.js"></script>
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/table.js"></script>
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/log.js"></script>
-
-
 
 {{-- +++++++++++ END OF SPA CORE +++++++++++ --}}
 

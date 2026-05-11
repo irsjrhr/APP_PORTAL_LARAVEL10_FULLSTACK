@@ -148,6 +148,50 @@ class FileModel extends Model
     | CLOUD UPLOAD
     |--------------------------------------------------------------------------
     */
+    private static function uploadFileS3($file, $userId)
+    {       
+        $response = [];
+        try {
+            $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $path =  '/uploads/' . $fileName;
+            $url_file = Storage::disk('s3_cloud')->url($path);
+
+            $result = Storage::disk('s3_cloud')->put(
+                $path,
+                file_get_contents($file->getRealPath()),
+                [
+                    'visibility' => 'public'
+                ]
+            );
+
+            if ($result) {
+                $response = [
+                    'status' => true,
+                    'msg' => 'Upload sukses',
+                ];
+
+            }else{
+                $response = [
+                    'status' => false,
+                    'msg' => 'S3 reject write (permission / policy issue)',
+                ];
+            }
+
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => false,
+                'msg' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'class' => get_class($e)
+            ];
+        }
+
+        $response['debug'] = [
+            "url_file" => $url_file,
+            "bucketName" => env('CLOUDUPLOAD_BUCKET')
+        ];
+        return $response;
+    }
     public static function tambah_file_cloud($request)
     {
         $file = $request->file('upload_file');
@@ -156,9 +200,9 @@ class FileModel extends Model
         $validasi = self::validasiFile($file);
         if (!$validasi['status']) return $validasi;
 
+        // Mendapatkan object file yang ingin di upload  
         $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension();
-
-        $upload = self::uploadFileCloud($file, $userId);
+        $upload = self::uploadFileS3($file, $userId);
 
         $response = [];
         if ($upload['status']) {
@@ -178,60 +222,20 @@ class FileModel extends Model
             $response = [
                 'status' => true,
                 'msg' => "Berhasil Melakukan Upload",
-                'response_server' => $upload,
             ];
 
         }else{
             $response = [
                 'status' => false,
                 'msg' => "Gagal Melakukan Upload, Status Server : " . $upload['msg'],
-                'response_server' => $upload,
             ];
-        }
-
-
+        }   
+        $response['response_s3'] = $upload;
         return $response;
     }
 
 
 
-    private static function uploadFileCloud($file, $userId)
-    {   
-        try {
-            $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $path =  '/uploads/' . $fileName;
-
-            $result = Storage::disk('s3_cloud')->put(
-                $path,
-                file_get_contents($file->getRealPath()),
-                [
-                    'visibility' => 'public'
-                ]
-            );
-
-            if (!$result) {
-                return [
-                    'status' => false,
-                    'msg' => 'S3 reject write (permission / policy issue)',
-                    'path' => $path
-                ];
-            }
-
-            return [
-                'status' => true,
-                'msg' => 'Upload sukses',
-                'url' => Storage::disk('s3_cloud')->url($path)
-            ];
-
-        } catch (\Throwable $e) {
-            return [
-                'status' => false,
-                'msg' => $e->getMessage(),
-                'line' => $e->getLine(),
-                'class' => get_class($e)
-            ];
-        }
-    }
 
     /*
     |--------------------------------------------------------------------------

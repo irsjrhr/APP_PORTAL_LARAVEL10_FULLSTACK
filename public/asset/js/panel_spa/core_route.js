@@ -5,7 +5,6 @@
 - File blade resource/Index/index.blade.php dan env untuk mengambil nilai env dan mengirimkan ke JS melalui variabel window.env 
 */
 
-
 $(document).ready(function(e) {
 
 	//Membuka halaman pertama dari menu yang paling awal yaitu dashboard 
@@ -45,6 +44,8 @@ function ROUTE_INIT( route, load_spa = false ) {
 	this.callback_route = false; //Fungsi callback
 	//Membuat route spa 
 }
+
+
 const ROUTE = {
 	QUE_ROUTE : [],   
 	add : function( route = "{path}/{path2}/{path3}", callback = false, load_spa = false ) {
