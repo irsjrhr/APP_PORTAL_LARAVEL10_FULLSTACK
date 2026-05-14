@@ -19,7 +19,7 @@
 <script type="text/javascript" src="{{asset('')}}asset/js/api.js"></script>
 {{-- +++++++++++ END OF APP CORE  +++++++++++ --}}
 
-L
+
 {{-- +++++++++++ SPA CORE +++++++++++ --}}
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/core.js"></script>
 <script type="text/javascript" src="{{asset('')}}asset/js/panel_spa/core_route.js"></script>
